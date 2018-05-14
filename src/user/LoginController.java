@@ -1,20 +1,15 @@
 package user;
 
 import javafx.event.*;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 
-public class LoginController {
-	@FXML
-	private TextField userName;
-	@FXML
-	private TextField password;
-	
+public class LoginController extends AbstractUserLoginController {
+	//	Add event for button Login
 	public void btnLogin(ActionEvent event) {
-		System.out.println(userName.getText());
+		System.out.println(getUserName().getText());
 	}
 	
+	//	Add event for button Register
 	public void btnRegister(ActionEvent event) {
-		System.out.println(password.getText());
+		System.out.println(getPassword().getText());
 	}
 }
