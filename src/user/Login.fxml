@@ -12,9 +12,9 @@
    <center>
       <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="226.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="118.0" layoutY="145.0" mnemonicParsing="false" styleClass="btn-green" stylesheets="@../application/application.css" text="Login" />
-            <Button layoutX="179.0" layoutY="145.0" mnemonicParsing="false" styleClass="btn-blue" stylesheets="@../application/application.css" text="Register" />
-            <TextField layoutX="105.0" layoutY="59.0" />
+            <Button layoutX="118.0" layoutY="145.0" mnemonicParsing="false" onAction="#btnLogin" styleClass="btn-green" stylesheets="@../application/application.css" text="Login" />
+            <Button layoutX="179.0" layoutY="145.0" mnemonicParsing="false" onAction="#btnRegister" styleClass="btn-blue" stylesheets="@../application/application.css" text="Register" />
+            <TextField fx:id="userName" layoutX="105.0" layoutY="59.0" />
             <Label alignment="TOP_CENTER" layoutX="37.0" layoutY="63.0" text="Username" />
             <Label layoutX="39.0" layoutY="107.0" text="Password" />
             <Label layoutX="104.0" layoutY="8.0" text="Login">
@@ -22,7 +22,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <PasswordField layoutX="105.0" layoutY="103.0" />
+            <PasswordField fx:id="password" layoutX="105.0" layoutY="103.0" />
          </children>
       </Pane>
    </center>
