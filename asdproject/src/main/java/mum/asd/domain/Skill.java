@@ -1,4 +1,4 @@
-package mum.asd;
+package mum.asd.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class Skill {
 //	public List<Volunteer> getVolunteers() { return volunteers; }
 //	public void setVolunteers(List<Volunteer> volunteers) { this.volunteers = volunteers; }
 
-//	public mum.asd.Skill(Volunteer volunteer) {
+//	public mum.asd.domain.Skill(Volunteer volunteer) {
 //		this.volunteer = volunteer;
 //	}
 
