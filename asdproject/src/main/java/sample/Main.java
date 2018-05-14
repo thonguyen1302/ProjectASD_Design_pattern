@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import mum.asd.ASDProject;
+import mum.asd.SupportFile;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -22,7 +22,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(ASDProject.class, args);
+        SpringApplication.run(SupportFile.class, args);
         launch(args);
     }
 }
