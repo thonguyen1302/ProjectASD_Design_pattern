@@ -1,6 +1,5 @@
 package mum.asd.controller;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,8 +21,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 /**
- * @author Ram Alapure
- * @since 05-04-2017
+ * @author Sang Tran
  */
 
 @Controller
