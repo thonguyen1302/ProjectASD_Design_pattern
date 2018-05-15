@@ -1,4 +1,4 @@
-package com.codetreatise.view;
+package mum.asd.view;
 
 import java.util.ResourceBundle;
 

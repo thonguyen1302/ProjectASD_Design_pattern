@@ -1,13 +1,13 @@
-package com.codetreatise.service.impl;
+package mum.asd.service.impl;
 
 import java.util.List;
 
+import mum.asd.domain.User;
+import mum.asd.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.codetreatise.bean.User;
-import com.codetreatise.repository.UserRepository;
-import com.codetreatise.service.UserService;
+import mum.asd.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

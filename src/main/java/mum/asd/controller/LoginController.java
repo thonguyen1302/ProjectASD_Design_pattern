@@ -1,4 +1,4 @@
-package com.codetreatise.controller;
+package mum.asd.controller;
 
 
 import java.io.IOException;
@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
-import com.codetreatise.config.StageManager;
-import com.codetreatise.service.UserService;
-import com.codetreatise.view.FxmlView;
+import mum.asd.config.StageManager;
+import mum.asd.service.UserService;
+import mum.asd.view.FxmlView;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,13 +1,13 @@
-package com.codetreatise;
+package mum.asd;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import mum.asd.config.StageManager;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.codetreatise.config.StageManager;
-import com.codetreatise.view.FxmlView;
+import mum.asd.view.FxmlView;
 
 @SpringBootApplication
 public class Main extends Application {

@@ -1,4 +1,4 @@
-package com.codetreatise.config;
+package mum.asd.config;
 
 import java.io.IOException;
 import java.util.ResourceBundle;

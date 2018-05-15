@@ -1,7 +1,7 @@
-package com.codetreatise.service;
+package mum.asd.service;
 
-import com.codetreatise.bean.User;
-import com.codetreatise.generic.GenericService;
+import mum.asd.domain.User;
+import mum.asd.generic.GenericService;
 
 public interface UserService extends GenericService<User> {
 

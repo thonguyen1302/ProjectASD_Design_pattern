@@ -1,4 +1,4 @@
-package com.codetreatise.generic;
+package mum.asd.generic;
 
 import java.util.List;
 
