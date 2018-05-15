@@ -15,3 +15,5 @@ maven*.jar
 .mvn
 mvnw.*
 mvnw
+.project
+src/main/resources/application.properties
