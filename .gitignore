@@ -1,0 +1,17 @@
+/target/
+
+.settings/
+*~
+.DS_Store
+.settings
+*.class
+lib
+*.war
+maven-*
+*.jar
+.idea
+*.iml
+maven*.jar
+.mvn
+mvnw.*
+mvnw
