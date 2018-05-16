@@ -14,7 +14,8 @@ public class Room {
     private int numberAdult;
     private int numberChildren;
     private float tax;
-    private String isVailable;
+    private String status;
+    private boolean isRoomVailable;
     private int roomNumber;
     private float price;
     @Enumerated
@@ -60,12 +61,12 @@ public class Room {
         this.tax = tax;
     }
 
-    public String getIsVailable() {
-        return isVailable;
+    public String getStatus() {
+        return status;
     }
 
-    public void setIsVailable(String isVailable) {
-        this.isVailable = isVailable;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getRoomNumber() {
@@ -90,5 +91,13 @@ public class Room {
 
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
+    }
+
+    public boolean isRoomVailable() {
+        return isRoomVailable;
+    }
+
+    public void setRoomVailable(boolean roomVailable) {
+        isRoomVailable = roomVailable;
     }
 }
