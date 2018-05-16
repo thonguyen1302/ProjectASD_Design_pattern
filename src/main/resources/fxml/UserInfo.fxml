@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="485.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mum.asd.controller.RegisterController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="534.0" layoutX="1.0" stroke="BLACK" strokeType="INSIDE" width="486.0" />
+      <Label layoutX="171.0" layoutY="12.0" text="Your profile" textFill="WHITE">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="80.0" layoutY="82.0" text="Email" />
+      <TextField layoutX="128.0" layoutY="78.0" prefHeight="25.0" prefWidth="301.0" />
+      <TextField layoutX="128.0" layoutY="131.0" prefHeight="25.0" prefWidth="301.0" />
+      <TextField layoutX="128.0" layoutY="184.0" prefHeight="25.0" prefWidth="301.0" />
+      <TextField layoutX="128.0" layoutY="235.0" prefHeight="25.0" prefWidth="301.0" />
+      <TextField layoutX="128.0" layoutY="290.0" prefHeight="25.0" prefWidth="301.0" />
+      <TextField accessibleRole="PASSWORD_FIELD" layoutX="128.0" layoutY="399.0" prefHeight="25.0" prefWidth="301.0" />
+      <TextField layoutX="128.0" layoutY="345.0" prefHeight="25.0" prefWidth="301.0" />
+      <Label layoutX="80.0" layoutY="135.0" text="Name" />
+      <Label layoutX="79.0" layoutY="188.0" text="Phone" />
+      <Label layoutX="78.0" layoutY="239.0" text="Gender" />
+      <Label layoutX="78.0" layoutY="294.0" text="Address" />
+      <Label layoutX="78.0" layoutY="349.0" text="Credit" />
+      <Label layoutX="62.0" layoutY="403.0" text="Password" />
+      <TextField accessibleRole="PASSWORD_FIELD" layoutX="128.0" layoutY="448.0" prefHeight="25.0" prefWidth="301.0" />
+      <Label layoutX="16.0" layoutY="452.0" text="Confirm Password" />
+      <Button fx:id="btnRegister" layoutX="128.0" layoutY="487.0" mnemonicParsing="false" onAction="#register" styleClass="btnGreen" stylesheets="@../styles/Styles.css" text="Save">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="205.0" layoutY="487.0" mnemonicParsing="false" styleClass="btnGreen" stylesheets="@../styles/Styles.css" text="Cancel">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

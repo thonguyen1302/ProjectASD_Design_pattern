@@ -29,7 +29,7 @@ public enum FxmlView {
     REGISTER {
         @Override
 		public String getTitle() {
-            return getStringFromResourceBundle("login.register");
+            return getStringFromResourceBundle("register.title");
         }
 
         @Override
