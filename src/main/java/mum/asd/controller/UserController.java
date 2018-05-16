@@ -284,12 +284,8 @@ public class UserController implements Initializable{
 		
 		// Add all users into table
 		loadUserDetails();
-		sampleMethod();
 	}
 
-	public void sampleMethod(){
-		PromotionService promotionService = new PromotionService();
-	}
 
 	/*
 	 *  Set All userTable column properties

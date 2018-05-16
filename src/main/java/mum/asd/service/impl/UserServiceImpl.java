@@ -3,7 +3,9 @@ package mum.asd.service.impl;
 import java.util.List;
 
 import mum.asd.domain.HotelUser;
+import mum.asd.domain.Promotion;
 import mum.asd.domain.User;
+import mum.asd.repository.PromotionRepository;
 import mum.asd.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +18,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private PromotionRepository promotionRepository;
 	
 	@Override
 	public User save(User entity) {
