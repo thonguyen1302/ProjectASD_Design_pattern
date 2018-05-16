@@ -3,6 +3,7 @@ package mum.asd.service.impl;
 import mum.asd.domain.Address;
 import mum.asd.domain.Booking;
 import mum.asd.domain.Promotion;
+import mum.asd.domain.Room;
 import mum.asd.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,8 +39,30 @@ public class SampleDataService {
     @Autowired
     UserRepository userRepository;
 
-    public void generateSampleDate(){
-        
+    public void generateSampleData(){
+        addSampleAddress();
+        addSamplePromotion();
+        addSampleBooking();
+        addSampleRoom();
+    }
+
+    public void addSampleRoom(){
+        addRoom("Grand", 7.6f, 300, 2, 2, true);
+        addRoom("GrandQueen", 7f, 350, 2, 2, true);
+        addRoom("GrandWest", 7.1f, 310, 2, 2, true);
+        addRoom("GrandBeach", 7.2f, 320, 2, 2, true);
+        addRoom("GrandHill", 7.3f, 280, 2, 2, true);
+    }
+
+    public void addRoom(String bedType, float tax, int price, int numChildren, int numAdult, boolean isVailable){
+        Room room = new Room();
+        room.setTax(tax);
+        room.setPrice(price);
+        room.setNumberChildren(numChildren);
+        room.setNumberAdult(numAdult);
+        room.setBedType(bedType);
+        room.setRoomVailable(isVailable);
+        roomRepository.save(room);
     }
 
     public void addSampleBooking(){

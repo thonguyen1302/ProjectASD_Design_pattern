@@ -79,9 +79,7 @@ public class LoginController implements Initializable{
 		sampleMethod();
 	}
 	public void sampleMethod(){
-//		PromotionService promotionService = new PromotionService();
-		sampleDataService.addSamplePromotion();
-		sampleDataService.addSampleAddress();
+		sampleDataService.generateSampleData();
 	}
 
 }
