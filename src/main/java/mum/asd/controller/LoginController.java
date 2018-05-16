@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import mum.asd.service.impl.PromotionService;
+import mum.asd.service.impl.AddressService;
+import mum.asd.service.impl.SampleDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -43,8 +44,12 @@ public class LoginController implements Initializable{
     @Autowired
     private UserService userService;
 
+
     @Autowired
-	PromotionService promotionService;
+	AddressService addressService;
+
+    @Autowired
+	SampleDataService sampleDataService;
     
     @Lazy
     @Autowired
@@ -75,12 +80,8 @@ public class LoginController implements Initializable{
 	}
 	public void sampleMethod(){
 //		PromotionService promotionService = new PromotionService();
-		promotionService.addPromotion("SpringHoliday", 15, 20);
-		promotionService.addPromotion("FallHoliday", 10, 25);
-		promotionService.addPromotion("SummerHoliday", 25, 10);
-		promotionService.addPromotion("WinterHoliday", 5, 5);
-
-		
+		sampleDataService.addSamplePromotion();
+		sampleDataService.addSampleAddress();
 	}
 
 }
