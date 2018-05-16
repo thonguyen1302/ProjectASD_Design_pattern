@@ -20,6 +20,8 @@ public class HotelUser {
     private Address address;
     private String email;
     private String credit;
+    @OneToOne
+    private Payment payment;
     @OneToMany
     private List<Booking> bookingList = new ArrayList<>();
     @Enumerated
@@ -103,5 +105,21 @@ public class HotelUser {
 
     public void setBookingList(List<Booking> bookingList) {
         this.bookingList = bookingList;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 }
