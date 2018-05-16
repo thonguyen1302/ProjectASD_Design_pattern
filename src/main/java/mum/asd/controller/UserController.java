@@ -283,10 +283,13 @@ public class UserController implements Initializable{
 		
 		// Add all users into table
 		loadUserDetails();
+//		sampleMethod();
 	}
-	
-	
-	
+
+	public void sampleMethod(){
+
+	}
+
 	/*
 	 *  Set All userTable column properties
 	 */

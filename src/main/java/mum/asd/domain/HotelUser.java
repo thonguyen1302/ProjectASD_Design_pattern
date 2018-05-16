@@ -26,6 +26,8 @@ public class HotelUser {
     private List<Booking> bookingList = new ArrayList<>();
     @Enumerated
     private UserType userType;
+    @OneToMany
+    private List<Promotion> promotions = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -121,5 +123,13 @@ public class HotelUser {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public List<Promotion> getPromotions() {
+        return promotions;
+    }
+
+    public void setPromotions(List<Promotion> promotions) {
+        this.promotions = promotions;
     }
 }
