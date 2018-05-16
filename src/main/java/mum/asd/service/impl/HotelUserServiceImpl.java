@@ -50,7 +50,7 @@ public class HotelUserServiceImpl implements HotelUserService {
 
 	@Override
 	public boolean authenticate(String username, String password){
-		User user = this.findByEmail(username);
+		HotelUser user = this.findByEmail(username);
 		if(user == null){
 			return false;
 		}else{
@@ -60,7 +60,7 @@ public class HotelUserServiceImpl implements HotelUserService {
 	}
 
 	@Override
-	public User findByEmail(String email) {
+	public HotelUser findByEmail(String email) {
 		return hotelUserRepository.findByEmail(email);
 	}
 

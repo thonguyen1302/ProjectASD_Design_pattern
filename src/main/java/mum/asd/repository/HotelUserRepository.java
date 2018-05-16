@@ -13,5 +13,5 @@ import java.util.List;
 
 @Repository
 public interface HotelUserRepository extends JpaRepository<HotelUser, Long> {
-	User findByEmail(String email);
+	HotelUser findByEmail(String email);
 }

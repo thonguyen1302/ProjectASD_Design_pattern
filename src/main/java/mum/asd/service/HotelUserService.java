@@ -8,6 +8,6 @@ public interface HotelUserService extends GenericService<HotelUser> {
 
 	boolean authenticate(String email, String password);
 	
-	User findByEmail(String email);
+	HotelUser findByEmail(String email);
 	
 }
