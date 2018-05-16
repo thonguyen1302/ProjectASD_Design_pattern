@@ -7,16 +7,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PromotionService {
-//    @Autowired
-//    PromotionRepository promotionRepository;
-//    public boolean addPromotion(String name, int discount, float percent){
-//        Promotion promotion = new Promotion();
-//        promotion.setName(name);
-//        promotion.setDiscount(discount);
-//        promotion.setPercent(percent);
-//        if (promotionRepository.save(promotion)!=null){
-//            return true;
-//        }
-//        return false;
-//    }
+    @Autowired
+    PromotionRepository promotionRepository;
+    public boolean addPromotion(String name, int discount, float percent){
+        Promotion promotion = new Promotion();
+        promotion.setName(name);
+        promotion.setDiscount(discount);
+        promotion.setPercent(percent);
+        if (promotionRepository.save(promotion)!=null){
+            return true;
+        }
+        return false;
+    }
 }

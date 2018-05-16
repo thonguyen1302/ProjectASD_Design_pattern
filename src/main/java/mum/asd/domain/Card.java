@@ -1,6 +1,7 @@
 package mum.asd.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Card {
@@ -12,6 +13,9 @@ public class Card {
 
     private String cardNumber;
     private String pinNumber;
+    private String Holdername;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expiredDate;
 
     public long getId() {
         return id;

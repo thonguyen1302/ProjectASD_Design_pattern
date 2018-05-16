@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import mum.asd.service.impl.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -283,11 +284,11 @@ public class UserController implements Initializable{
 		
 		// Add all users into table
 		loadUserDetails();
-//		sampleMethod();
+		sampleMethod();
 	}
 
 	public void sampleMethod(){
-
+		PromotionService promotionService = new PromotionService();
 	}
 
 	/*
