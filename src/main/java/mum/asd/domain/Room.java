@@ -15,6 +15,7 @@ public class Room {
     private int numberChildren;
     private float tax;
     private String status;
+    private boolean isRoomVailable;
     private int roomNumber;
     private float price;
     @Enumerated
@@ -90,5 +91,13 @@ public class Room {
 
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
+    }
+
+    public boolean isRoomVailable() {
+        return isRoomVailable;
+    }
+
+    public void setRoomVailable(boolean roomVailable) {
+        isRoomVailable = roomVailable;
     }
 }

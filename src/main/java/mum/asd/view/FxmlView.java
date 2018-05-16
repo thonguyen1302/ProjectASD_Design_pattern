@@ -36,6 +36,28 @@ public enum FxmlView {
 		public String getFxmlFile() {
             return "/fxml/Register.fxml";
         }
+    },
+	BOOKING {
+        @Override
+		public String getTitle() {
+            return getStringFromResourceBundle("booking.title");
+        }
+
+        @Override
+		public String getFxmlFile() {
+            return "/fxml/Booking.fxml";
+        }
+    },
+	VIEWROOMS {
+        @Override
+		public String getTitle() {
+            return getStringFromResourceBundle("booking.title");
+        }
+
+        @Override
+		public String getFxmlFile() {
+            return "/fxml/ViewRooms.fxml";
+        }
     };
     
     public abstract String getTitle();

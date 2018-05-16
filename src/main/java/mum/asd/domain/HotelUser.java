@@ -20,10 +20,14 @@ public class HotelUser {
     private Address address;
     private String email;
     private String credit;
+    @OneToOne
+    private Payment payment;
     @OneToMany
     private List<Booking> bookingList = new ArrayList<>();
     @Enumerated
     private UserType userType;
+    @OneToMany
+    private List<Promotion> promotions = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -103,5 +107,29 @@ public class HotelUser {
 
     public void setBookingList(List<Booking> bookingList) {
         this.bookingList = bookingList;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public List<Promotion> getPromotions() {
+        return promotions;
+    }
+
+    public void setPromotions(List<Promotion> promotions) {
+        this.promotions = promotions;
     }
 }

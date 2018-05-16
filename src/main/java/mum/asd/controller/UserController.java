@@ -284,9 +284,8 @@ public class UserController implements Initializable{
 		// Add all users into table
 		loadUserDetails();
 	}
-	
-	
-	
+
+
 	/*
 	 *  Set All userTable column properties
 	 */

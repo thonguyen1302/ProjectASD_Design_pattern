@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import mum.asd.service.impl.AddressService;
+import mum.asd.service.impl.SampleDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -41,6 +43,13 @@ public class LoginController implements Initializable{
     
     @Autowired
     private UserService userService;
+
+
+    @Autowired
+	AddressService addressService;
+
+    @Autowired
+	SampleDataService sampleDataService;
     
     @Lazy
     @Autowired
@@ -67,7 +76,10 @@ public class LoginController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		sampleMethod();
+	}
+	public void sampleMethod(){
+		sampleDataService.generateSampleData();
 	}
 
 }

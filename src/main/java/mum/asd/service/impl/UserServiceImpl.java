@@ -2,9 +2,13 @@ package mum.asd.service.impl;
 
 import java.util.List;
 
+import mum.asd.domain.HotelUser;
+import mum.asd.domain.Promotion;
 import mum.asd.domain.User;
+import mum.asd.repository.PromotionRepository;
 import mum.asd.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import mum.asd.service.UserService;
@@ -14,6 +18,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private PromotionRepository promotionRepository;
 	
 	@Override
 	public User save(User entity) {
@@ -65,5 +72,7 @@ public class UserServiceImpl implements UserService {
 	public void deleteInBatch(List<User> users) {
 		userRepository.deleteInBatch(users);
 	}
-	
+
+//	@Override
+//	public List<HotelUser> findHotelUserByFirstName(@Param("firstName") String firstName){return userRepository.findHotelUserByFirstName(firstName);}
 }
