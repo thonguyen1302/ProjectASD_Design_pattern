@@ -15,8 +15,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import mum.asd.domain.Address;
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.User;
+import mum.asd.service.AddressService;
 import mum.asd.service.HotelUserService;
 import mum.asd.service.UserService;
 
@@ -68,6 +70,9 @@ public class RegisterController extends ApplicationController implements Initial
 	
 	@Autowired
 	private HotelUserService hotelUserService;
+	
+	@Autowired
+	private AddressService addressService;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -86,15 +91,19 @@ public class RegisterController extends ApplicationController implements Initial
     	   validatePassword(getPassword(), getConfirmPassword())
     	   ){
     
-    				HotelUser hotelUser = new HotelUser();
-    				hotelUser.setFirstName(getFirstName());
-    				hotelUser.setLastName(getLastName());
-    				hotelUser.setEmail(getEmail());
-        			hotelUser.setPassword(getPassword());
-        			
-        			HotelUser newUser = hotelUserService.save(hotelUser);
-        			
-        			showAlert(getStringFromResourceBundle("register.successful"));
+			HotelUser hotelUser = new HotelUser();
+			hotelUser.setFirstName(getFirstName());
+			hotelUser.setLastName(getLastName());
+			hotelUser.setEmail(getEmail());
+			hotelUser.setPassword(getPassword());
+			
+			Address address = new Address(getStreet(), getCity(), getState(), getZipcode());
+			
+			hotelUser.setAddress(address);
+			
+			hotelUserService.save(hotelUser);
+			
+			showAlert(getStringFromResourceBundle("register.successful"));
     	}
     }
 	
