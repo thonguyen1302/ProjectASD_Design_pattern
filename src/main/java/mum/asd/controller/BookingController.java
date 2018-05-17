@@ -6,6 +6,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import mum.asd.service.impl.RoomService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javafx.event.ActionEvent;
@@ -60,7 +64,7 @@ public class BookingController implements Initializable {
 	private Button btnLogout;
 	
 	@FXML
-	private TableView<Room> userTable;
+	private TableView<Room> roomTableView;
 	
 	@FXML
 	private TextField totalPrice;
@@ -94,6 +98,9 @@ public class BookingController implements Initializable {
 	
 	@FXML
     private MenuItem deleteRoom;
+
+	@Autowired
+	RoomService roomService;
 	
 	@FXML
     private void exit(ActionEvent event) {
@@ -120,6 +127,16 @@ public class BookingController implements Initializable {
     private void deleteRoom(ActionEvent event) {
 		
 	}
+
+	private ObservableList<Room> roomsList = FXCollections.observableArrayList();
+
+	private void loadRoomDetails(){
+		roomsList.clear();
+		roomsList.addAll(roomService.);
+
+		roomTableView.setItems(roomsList);
+	}
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
