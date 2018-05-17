@@ -53,23 +53,16 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 
 	@Override
 	public void saveBooking() {
-		// TODO Auto-generated method stub
-		
 		// Call api to save to booking table
-//		BookingService bookingService = new BookingServiceImpl();
 		bookingService = ApplicationContextHolder.getContext().getBean(BookingService.class);
 		bookingService.save(this.booking);
 		
 		// Save user to have relationship
 		String email = this.user.getEmail();
-		HotelUserService userService = new HotelUserServiceImpl();
+		HotelUserService userService = ApplicationContextHolder.getContext().getBean(HotelUserService.class);
 		HotelUser currentUser = userService.findByEmail(email);
 		currentUser.addBookingToBookingList(this.booking);
 		userService.save(currentUser);
-		
-		// Read booking, get booking id
-		
-		// Save to booking_rooms table
 	}
 
 	public HotelUser getUser() {

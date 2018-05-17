@@ -26,9 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mum.asd.domain.Card;
 import mum.asd.domain.Room;
-import mum.asd.domain.User;
 import mum.asd.domain.booking.ConcreteServiceBuilder;
-import mum.asd.domain.booking.ServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
 import mum.asd.service.BookingService;
 
@@ -118,9 +116,6 @@ public class BookingController implements Initializable {
 	
 	@FXML
     private void pay(ActionEvent event) {
-		ConcreteServiceBuilder concreteServiceBuilder = 
-				(ConcreteServiceBuilder)this.serviceDirector.getServiceBuilder();
-		concreteServiceBuilder.setBookingService(this.bookingService); // add booking service to service builder
 		this.serviceDirector.getServiceBuilder().saveBooking();
 	}
 	
@@ -144,7 +139,6 @@ public class BookingController implements Initializable {
 		this.serviceDirector = serviceDirector;
 		ConcreteServiceBuilder concreteServiceBuilder =
 						(ConcreteServiceBuilder)this.serviceDirector.getServiceBuilder();
-		//concreteServiceBuilder.setBookingService(this.bookingService); // add booking service to service builder
 		
 		// Init user information to GUI
 		this.name.setText(concreteServiceBuilder.getUser().getFirstName() + 
