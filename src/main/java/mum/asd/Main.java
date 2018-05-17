@@ -11,10 +11,20 @@ import mum.asd.view.FxmlView;
 
 @SpringBootApplication
 public class Main extends Application {
+	private static Stage primaryStage;
 
     protected ConfigurableApplicationContext springContext;
     protected StageManager stageManager;
+    
+    // Store primary stage
+    private void setPrimaryStage(Stage stage) {
+        primaryStage = stage;
+    }
 
+    static public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+    
     public static void main(final String[] args) {
         Application.launch(args);  
     }
@@ -26,6 +36,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+    	setPrimaryStage(stage);
+    	
         stageManager = springContext.getBean(StageManager.class, stage);
         displayInitialScene();
     }
@@ -41,7 +53,7 @@ public class Main extends Application {
      * window.
      */
     protected void displayInitialScene() {
-        stageManager.switchScene(FxmlView.LOGIN);
+        stageManager.switchScene(FxmlView.VIEWROOMS);
     }
 
     

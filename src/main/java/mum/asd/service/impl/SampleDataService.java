@@ -73,7 +73,7 @@ public class SampleDataService {
     }
 
     public void addBooking(String bookingNumber, boolean checkInStatus, boolean checkOutStatus, Date endDate, Date startDate){
-        Booking booking = new Booking();
+        Booking booking = new Booking(startDate, endDate);
         booking.setBookingNumber(bookingNumber);
         booking.setCheckInStatus(checkInStatus);
         booking.setCheckOutStatus(checkOutStatus);

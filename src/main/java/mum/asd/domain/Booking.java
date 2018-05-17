@@ -1,6 +1,10 @@
 package mum.asd.domain;
 
 import javax.persistence.*;
+
+import org.springframework.boot.autoconfigure.data.ldap.LdapDataAutoConfiguration;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,8 +27,18 @@ public class Booking {
     private Boolean checkOutStatus;
     @OneToOne
     private Payment payment;
+    
+    public Booking(Date startDate, Date endDate) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		
+		// Generate booking number
+		LocalDate lDate = LocalDate.now();
+		this.bookingNumber = lDate.toString();
+	}
 
-    public String getBookingNumber() {
+	public String getBookingNumber() {
         return bookingNumber;
     }
 
