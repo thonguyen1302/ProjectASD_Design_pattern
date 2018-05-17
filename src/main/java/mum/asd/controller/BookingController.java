@@ -113,8 +113,7 @@ public class BookingController implements Initializable {
 	
 	@FXML
     private void pay(ActionEvent event) {
-		
-		
+		this.serviceDirector.getServiceBuilder().saveBooking();
 	}
 	
 	@FXML
@@ -142,11 +141,13 @@ public class BookingController implements Initializable {
 		this.name.setText(concreteServiceBuilder.getUser().getFirstName() + 
 				" " + concreteServiceBuilder.getUser().getLastName());
 		this.address.setText(concreteServiceBuilder.getUser().getAddress().toString());
+		
 		List<String> numCard = new ArrayList<>();
 		for (Card c : concreteServiceBuilder.getUser().getPayment().getCards()) {
 			String cardNumber = c.getCardNumber();
 			numCard.add("xxxxxx" + cardNumber.substring(0, cardNumber.length() - 5));
-		}
+		} // need to process card and payment
+		
 		this.cardNumber.getItems().addAll(numCard);
 		this.startDate.setText(concreteServiceBuilder.getBooking().getStartDate().toString());
 		this.endDate.setText(concreteServiceBuilder.getBooking().getEndDate().toString());

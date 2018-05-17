@@ -7,6 +7,12 @@ import mum.asd.domain.Booking;
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.Room;
 import mum.asd.domain.User;
+import mum.asd.service.BookingService;
+import mum.asd.service.HotelUserService;
+import mum.asd.service.UserService;
+import mum.asd.service.impl.BookingServiceImpl;
+import mum.asd.service.impl.HotelUserServiceImpl;
+import mum.asd.service.impl.UserServiceImpl;
 
 /**
  * @author vynguyen
@@ -36,7 +42,18 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 	@Override
 	public void saveBooking() {
 		// TODO Auto-generated method stub
+		
 		// Call api to save to booking table
+		BookingService bookingService = new BookingServiceImpl();
+		bookingService.save(this.booking);
+		
+		// Save user to have relationship
+		String email = this.user.getEmail();
+		HotelUserService userService = new HotelUserServiceImpl();
+		HotelUser currentUser = userService.findByEmail(email);
+		currentUser.addBookingToBookingList(this.booking);
+		userService.save(currentUser);
+		
 		// Read booking, get booking id
 		
 		// Save to booking_rooms table

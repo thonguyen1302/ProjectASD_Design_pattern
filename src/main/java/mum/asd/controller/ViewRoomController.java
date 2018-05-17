@@ -58,6 +58,7 @@ public class ViewRoomController implements Initializable {
 		HotelUser user = new HotelUser();
 		user.setFirstName("Vy");
 		user.setLastName("Nguyen");
+		user.setEmail("vynguyenlc@gmail.com");
 		user.setAddress(new Address("1000 N 4th St", "FF", "Iowa", "52557"));
 		
 		Payment payment = new Payment();
@@ -88,9 +89,13 @@ public class ViewRoomController implements Initializable {
 		
 		// List rooms is booked
 		Room r1 = new Room(BedType.Double.toString(), 2, 2, 7, true, 001, 130, RoomType.Deluxe);
+		r1.setId(1);
 		Room r2 = new Room(BedType.Twin.toString(), 2, 2, 8, true, 002, 120, RoomType.Standard);
+		r2.setId(2);
 		Room r3 = new Room(BedType.Single.toString(), 2, 2, 5, true, 003, 140, RoomType.Suite);
+		r3.setId(3);
 		Room r4 = new Room(BedType.Double.toString(), 2, 2, 7, true, 004, 110, RoomType.Deluxe);
+		r4.setId(4);
 		List<Room> lstRooms = new ArrayList<Room>();
 		lstRooms.add(r1); lstRooms.add(r2); lstRooms.add(r3); lstRooms.add(r4);
 		

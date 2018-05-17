@@ -21,7 +21,9 @@ public class Room {
     @Enumerated
     private RoomType roomType;
     
-    
+    public Room() {
+    	// empty constructor
+    }
     
     public Room(String bedType, int numberAdult, int numberChildren, float tax, boolean isRoomVailable, int roomNumber,
 			float price, RoomType roomType) {
