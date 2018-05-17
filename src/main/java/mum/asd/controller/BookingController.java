@@ -2,6 +2,8 @@ package mum.asd.controller;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Controller;
@@ -17,9 +19,18 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import mum.asd.domain.Room;
+import mum.asd.domain.User;
+import mum.asd.domain.booking.ConcreteServiceBuilder;
+import mum.asd.domain.booking.ServiceBuilder;
+import mum.asd.domain.booking.ServiceDirector;
 
+/**
+ * @author vynguyen
+ *
+ */
 @Controller
 public class BookingController implements Initializable {
+	private ServiceDirector serviceDirector;
 	
 	@FXML
 	private TextField name;
@@ -50,6 +61,12 @@ public class BookingController implements Initializable {
 	
 	@FXML
 	private TableView<Room> userTable;
+	
+	@FXML
+	private TextField totalPrice;
+	
+	@FXML
+	private TextField discount;
 	
 	@FXML
 	private TableColumn<Room, Long> colRoomNumber;
@@ -107,7 +124,30 @@ public class BookingController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
 	}
 
+	// Use for passing data from view book controller to booking controller
+	public void setServiceDirector(ServiceDirector serviceDirector) {
+		this.serviceDirector = serviceDirector;
+		ConcreteServiceBuilder concreteServiceBuilder = 
+						(ConcreteServiceBuilder)this.serviceDirector.getServiceBuilder();
+		
+		// Init user information to GUI
+		this.name.setText(concreteServiceBuilder.getUser().getFirstName() + 
+				" " + concreteServiceBuilder.getUser().getLastName());
+	}
+	
+	// Use for saving booking later
+	public void setListRoomsBooked(Date startDate, Date endDate) {
+		this.serviceDirector.createBooking(startDate, endDate);
+	}
+		
+	// Use for saving booking later
+	public void setListRoomsBooked(List<Room> lstRoom) {
+		this.serviceDirector.setRoomsToBooking(lstRoom);
+	}
+	
+	public ServiceDirector getServiceDirector() {
+		return this.serviceDirector;
+	}
 }
