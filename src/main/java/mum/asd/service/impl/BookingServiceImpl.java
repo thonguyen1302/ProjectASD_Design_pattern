@@ -3,6 +3,7 @@ package mum.asd.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 import mum.asd.domain.Booking;
@@ -10,6 +11,7 @@ import mum.asd.repository.BookingRepository;
 import mum.asd.service.BookingService;
 
 @Service
+@Configurable
 public class BookingServiceImpl implements BookingService {
 	
 	@Autowired

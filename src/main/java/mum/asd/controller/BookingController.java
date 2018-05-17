@@ -142,7 +142,7 @@ public class BookingController implements Initializable {
 	// Use for passing data from view book controller to booking controller
 	public void setServiceDirector(ServiceDirector serviceDirector) {
 		this.serviceDirector = serviceDirector;
-		ConcreteServiceBuilder concreteServiceBuilder = 
+		ConcreteServiceBuilder concreteServiceBuilder =
 						(ConcreteServiceBuilder)this.serviceDirector.getServiceBuilder();
 		//concreteServiceBuilder.setBookingService(this.bookingService); // add booking service to service builder
 		

@@ -3,28 +3,37 @@ package mum.asd.domain.booking;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import mum.asd.domain.Booking;
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.Room;
 import mum.asd.domain.User;
+import mum.asd.service.ApplicationContextHolder;
 import mum.asd.service.BookingService;
 import mum.asd.service.HotelUserService;
 import mum.asd.service.UserService;
 import mum.asd.service.impl.BookingServiceImpl;
 import mum.asd.service.impl.HotelUserServiceImpl;
 import mum.asd.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 /**
  * @author vynguyen
  *
  */
+//@Component
+//@Configurable
 public class ConcreteServiceBuilder implements ServiceBuilder {
+//	@Autowired
 	private HotelUser user;
 	private Booking booking;
-	private BookingService bookingService;
-	
+
+	@Autowired
+	BookingService bookingService;
+
 	public ConcreteServiceBuilder(HotelUser user) {
 		super();
 		this.user = user;
@@ -47,7 +56,8 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 		// TODO Auto-generated method stub
 		
 		// Call api to save to booking table
-		//bookingService = new BookingServiceImpl();
+//		BookingService bookingService = new BookingServiceImpl();
+		bookingService = ApplicationContextHolder.getContext().getBean(BookingService.class);
 		bookingService.save(this.booking);
 		
 		// Save user to have relationship
@@ -68,16 +78,5 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 
 	public Booking getBooking() {
 		return booking;
-	}
-
-	public BookingService getBookingService() {
-		return bookingService;
-	}
-
-	/*
-	 * Must set booking service before doing any action
-	 */
-	public void setBookingService(BookingService bookingService) {
-		this.bookingService = bookingService;
 	}
 }
