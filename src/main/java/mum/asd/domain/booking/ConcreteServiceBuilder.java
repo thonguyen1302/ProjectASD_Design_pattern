@@ -3,6 +3,8 @@ package mum.asd.domain.booking;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import mum.asd.domain.Booking;
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.Room;
@@ -21,6 +23,7 @@ import mum.asd.service.impl.UserServiceImpl;
 public class ConcreteServiceBuilder implements ServiceBuilder {
 	private HotelUser user;
 	private Booking booking;
+	private BookingService bookingService;
 	
 	public ConcreteServiceBuilder(HotelUser user) {
 		super();
@@ -44,7 +47,7 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 		// TODO Auto-generated method stub
 		
 		// Call api to save to booking table
-		BookingService bookingService = new BookingServiceImpl();
+		//bookingService = new BookingServiceImpl();
 		bookingService.save(this.booking);
 		
 		// Save user to have relationship
@@ -65,5 +68,16 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 
 	public Booking getBooking() {
 		return booking;
+	}
+
+	public BookingService getBookingService() {
+		return bookingService;
+	}
+
+	/*
+	 * Must set booking service before doing any action
+	 */
+	public void setBookingService(BookingService bookingService) {
+		this.bookingService = bookingService;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javafx.collections.FXCollections;
@@ -29,6 +30,7 @@ import mum.asd.domain.User;
 import mum.asd.domain.booking.ConcreteServiceBuilder;
 import mum.asd.domain.booking.ServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
+import mum.asd.service.BookingService;
 
 /**
  * @author vynguyen
@@ -101,6 +103,9 @@ public class BookingController implements Initializable {
 	@FXML
     private MenuItem deleteRoom;
 	
+	@Autowired
+	private BookingService bookingService;
+	
 	@FXML
     private void exit(ActionEvent event) {
 		
@@ -113,6 +118,9 @@ public class BookingController implements Initializable {
 	
 	@FXML
     private void pay(ActionEvent event) {
+		ConcreteServiceBuilder concreteServiceBuilder = 
+				(ConcreteServiceBuilder)this.serviceDirector.getServiceBuilder();
+		concreteServiceBuilder.setBookingService(this.bookingService); // add booking service to service builder
 		this.serviceDirector.getServiceBuilder().saveBooking();
 	}
 	
@@ -136,6 +144,7 @@ public class BookingController implements Initializable {
 		this.serviceDirector = serviceDirector;
 		ConcreteServiceBuilder concreteServiceBuilder = 
 						(ConcreteServiceBuilder)this.serviceDirector.getServiceBuilder();
+		//concreteServiceBuilder.setBookingService(this.bookingService); // add booking service to service builder
 		
 		// Init user information to GUI
 		this.name.setText(concreteServiceBuilder.getUser().getFirstName() + 
