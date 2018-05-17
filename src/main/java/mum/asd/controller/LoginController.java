@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import mum.asd.config.StageManager;
+import mum.asd.service.HotelUserService;
 import mum.asd.service.UserService;
 import mum.asd.view.FxmlView;
 
@@ -23,7 +24,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 /**
- * @author Sang Tran
+ * @author Tan Tho Nguyen
  */
 
 @Controller
@@ -42,7 +43,7 @@ public class LoginController implements Initializable{
     private Label lblLogin;
     
     @Autowired
-    private UserService userService;
+    private HotelUserService hotelUserService;
 
 
     @Autowired
@@ -57,7 +58,7 @@ public class LoginController implements Initializable{
         
 	@FXML
     private void loginAction(ActionEvent event) throws IOException{
-    	if(userService.authenticate(getUsername(), getPassword())){
+    	if(hotelUserService.authenticate(getUsername(), getPassword())){
     		    		
     		stageManager.switchScene(FxmlView.USER);
     		
