@@ -62,4 +62,9 @@ public class Address {
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
+    
+    public String toString() {
+		return this.street + " " + this.city + " "
+    			+ this.state + " " + this.zipcode;
+    }
 }

@@ -20,8 +20,23 @@ public class Room {
     private float price;
     @Enumerated
     private RoomType roomType;
+    
+    
+    
+    public Room(String bedType, int numberAdult, int numberChildren, float tax, boolean isRoomVailable, int roomNumber,
+			float price, RoomType roomType) {
+		super();
+		this.bedType = bedType;
+		this.numberAdult = numberAdult;
+		this.numberChildren = numberChildren;
+		this.tax = tax;
+		this.isRoomVailable = isRoomVailable;
+		this.roomNumber = roomNumber;
+		this.price = price;
+		this.roomType = roomType;
+	}
 
-    public long getId() {
+	public long getId() {
         return id;
     }
 

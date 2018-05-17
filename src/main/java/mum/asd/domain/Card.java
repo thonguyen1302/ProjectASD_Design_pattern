@@ -13,7 +13,7 @@ public class Card {
 
     private String cardNumber;
     private String pinNumber;
-    private String Holdername;
+    private String holdername;
     @Temporal(TemporalType.TIMESTAMP)
     private Date expiredDate;
 
@@ -40,8 +40,24 @@ public class Card {
     public void setPinNumber(String pinNumber) {
         this.pinNumber = pinNumber;
     }
+    
+    public String getHolderName() {
+		return holdername;
+	}
 
-    public void transaction(){
+	public void setHoldername(String holderName) {
+		holdername = holderName;
+	}
+
+	public Date getExpiredDate() {
+		return expiredDate;
+	}
+
+	public void setExpiredDate(Date expiredDate) {
+		this.expiredDate = expiredDate;
+	}
+
+	public void transaction(){
 
     }
     public void validation(){
