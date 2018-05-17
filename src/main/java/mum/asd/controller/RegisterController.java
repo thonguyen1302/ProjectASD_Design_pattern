@@ -98,6 +98,7 @@ public class RegisterController extends ApplicationController implements Initial
 			hotelUser.setPassword(getPassword());
 			
 			Address address = new Address(getStreet(), getCity(), getState(), getZipcode());
+			addressService.save(address);
 			
 			hotelUser.setAddress(address);
 			

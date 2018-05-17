@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import mum.asd.domain.Booking;
 import mum.asd.repository.BookingRepository;
 import mum.asd.service.BookingService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BookingServiceImpl implements BookingService {
 	
 	@Autowired
