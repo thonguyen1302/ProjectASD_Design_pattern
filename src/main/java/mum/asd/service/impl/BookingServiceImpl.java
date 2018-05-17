@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import mum.asd.domain.Booking;
 import mum.asd.repository.BookingRepository;
 import mum.asd.service.BookingService;
+import org.springframework.stereotype.Service;
 
 @Service
 @Configurable

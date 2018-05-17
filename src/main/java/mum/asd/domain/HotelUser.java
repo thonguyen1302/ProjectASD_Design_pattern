@@ -14,6 +14,7 @@ public class HotelUser {
     private String lastName;
     private String phone;
     private String password;
+//    private long address_id;
     @Enumerated
     private Gender gender;
     @OneToOne
@@ -84,6 +85,14 @@ public class HotelUser {
     public void setAddress(Address address) {
         this.address = address;
     }
+    
+//    public long getAddressID() {
+//        return address_id;
+//    }
+//
+//    public void setAddressID(long id) {
+//        this.address_id = id;
+//    }
 
     public String getEmail() {
         return email;
