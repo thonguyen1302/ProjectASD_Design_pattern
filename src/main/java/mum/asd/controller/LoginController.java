@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import mum.asd.service.impl.AddressService;
+import mum.asd.service.impl.AddressServiceImpl;
 import mum.asd.service.impl.SampleDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -47,7 +47,7 @@ public class LoginController implements Initializable{
 
 
     @Autowired
-	AddressService addressService;
+	AddressServiceImpl addressService;
 
     @Autowired
 	SampleDataService sampleDataService;

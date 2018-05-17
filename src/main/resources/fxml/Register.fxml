@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="485.0" prefWidth="432.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mum.asd.controller.RegisterController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="485.0" stroke="BLACK" strokeType="INSIDE" width="432.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="638.0" stroke="BLACK" strokeType="INSIDE" width="432.0" />
       <TextField fx:id="email" layoutX="134.0" layoutY="79.0" prefHeight="25.0" prefWidth="230.0" />
       <TextField fx:id="firstName" layoutX="134.0" layoutY="131.0" prefHeight="25.0" prefWidth="230.0" />
       <TextField fx:id="lastName" layoutX="134.0" layoutY="182.0" prefHeight="25.0" prefWidth="230.0" />
@@ -30,15 +30,23 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="btnRegister" layoutX="134.0" layoutY="414.0" mnemonicParsing="false" onAction="#register" styleClass="btnGreen" text="Register" textFill="WHITE">
+      <Button fx:id="btnRegister" layoutX="134.0" layoutY="596.0" mnemonicParsing="false" onAction="#register" styleClass="btnGreen" text="Register" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btnLogin" layoutX="237.0" layoutY="414.0" mnemonicParsing="false" styleClass="btnGreen" text="Login" textFill="WHITE">
+      <Button fx:id="btnLogin" layoutX="237.0" layoutY="596.0" mnemonicParsing="false" styleClass="btnGreen" text="Login" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
+      <TextField fx:id="street" accessibleRole="TEXT_FIELD" layoutX="134.0" layoutY="418.0" prefHeight="25.0" prefWidth="230.0" />
+      <TextField fx:id="city" accessibleRole="TEXT_FIELD" layoutX="134.0" layoutY="465.0" prefHeight="25.0" prefWidth="230.0" />
+      <TextField fx:id="state" accessibleRole="TEXT_FIELD" layoutX="134.0" layoutY="510.0" prefHeight="25.0" prefWidth="230.0" />
+      <TextField fx:id="zipcode" accessibleRole="TEXT_FIELD" layoutX="134.0" layoutY="552.0" prefHeight="25.0" prefWidth="230.0" />
+      <Label layoutX="82.0" layoutY="422.0" text="Street" textFill="WHITE" />
+      <Label layoutX="91.0" layoutY="469.0" text="City" textFill="WHITE" />
+      <Label layoutX="90.0" layoutY="514.0" text="Sate" textFill="WHITE" />
+      <Label layoutX="73.0" layoutY="556.0" text="Zipcode" textFill="WHITE" />
    </children>
 </AnchorPane>
