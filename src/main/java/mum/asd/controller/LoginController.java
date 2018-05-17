@@ -60,7 +60,7 @@ public class LoginController implements Initializable{
     private void loginAction(ActionEvent event) throws IOException{
     	if(hotelUserService.authenticate(getUsername(), getPassword())){
     		    		
-    		stageManager.switchScene(FxmlView.USER);
+    		stageManager.switchScene(FxmlView.USERINFO);
     		
     	}else{
     		lblLogin.setText("Login Failed.");
