@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import mum.asd.domain.Room;
+import mum.asd.service.impl.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -31,16 +35,30 @@ public class ViewRoomController implements Initializable {
 	
 	@FXML
 	private Label userId;
-	
+
+	@Autowired
+	RoomService roomService;
+
 	@FXML
     private void exit(ActionEvent event) {
 		
 	}
-	
+
+
+	private ObservableList<Room> roomsList = FXCollections.observableArrayList();
+
 	@Lazy
     @Autowired
     private StageManager stageManager;
-	
+
+
+	private void loadRoomDetails(){
+		roomsList.clear();
+		roomsList.addAll(roomService.findAll());
+
+		roomTableView.setItems(roomsList);
+	}
+
 	@FXML
     private void pay(ActionEvent event) {
 		HotelUser user = new HotelUser();

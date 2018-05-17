@@ -35,7 +35,8 @@ import mum.asd.domain.booking.ServiceDirector;
 @Controller
 public class BookingController implements Initializable {
 	private ServiceDirector serviceDirector;
-	
+
+
 	@FXML
 	private TextField name;
 	
@@ -128,14 +129,7 @@ public class BookingController implements Initializable {
 		
 	}
 
-	private ObservableList<Room> roomsList = FXCollections.observableArrayList();
 
-	private void loadRoomDetails(){
-		roomsList.clear();
-		roomsList.addAll(roomService.);
-
-		roomTableView.setItems(roomsList);
-	}
 
 
 	@Override
