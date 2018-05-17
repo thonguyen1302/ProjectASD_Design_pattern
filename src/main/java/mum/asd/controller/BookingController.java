@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javafx.collections.FXCollections;
@@ -25,10 +26,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mum.asd.domain.Card;
 import mum.asd.domain.Room;
-import mum.asd.domain.User;
 import mum.asd.domain.booking.ConcreteServiceBuilder;
-import mum.asd.domain.booking.ServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
+import mum.asd.service.BookingService;
 
 /**
  * @author vynguyen
@@ -101,6 +101,9 @@ public class BookingController implements Initializable {
 	@FXML
     private MenuItem deleteRoom;
 	
+	@Autowired
+	private BookingService bookingService;
+	
 	@FXML
     private void exit(ActionEvent event) {
 		
@@ -113,8 +116,7 @@ public class BookingController implements Initializable {
 	
 	@FXML
     private void pay(ActionEvent event) {
-		
-		
+		this.serviceDirector.getServiceBuilder().saveBooking();
 	}
 	
 	@FXML
@@ -135,18 +137,20 @@ public class BookingController implements Initializable {
 	// Use for passing data from view book controller to booking controller
 	public void setServiceDirector(ServiceDirector serviceDirector) {
 		this.serviceDirector = serviceDirector;
-		ConcreteServiceBuilder concreteServiceBuilder = 
+		ConcreteServiceBuilder concreteServiceBuilder =
 						(ConcreteServiceBuilder)this.serviceDirector.getServiceBuilder();
 		
 		// Init user information to GUI
 		this.name.setText(concreteServiceBuilder.getUser().getFirstName() + 
 				" " + concreteServiceBuilder.getUser().getLastName());
 		this.address.setText(concreteServiceBuilder.getUser().getAddress().toString());
+		
 		List<String> numCard = new ArrayList<>();
 		for (Card c : concreteServiceBuilder.getUser().getPayment().getCards()) {
 			String cardNumber = c.getCardNumber();
 			numCard.add("xxxxxx" + cardNumber.substring(0, cardNumber.length() - 5));
-		}
+		} // need to process card and payment
+		
 		this.cardNumber.getItems().addAll(numCard);
 		this.startDate.setText(concreteServiceBuilder.getBooking().getStartDate().toString());
 		this.endDate.setText(concreteServiceBuilder.getBooking().getEndDate().toString());

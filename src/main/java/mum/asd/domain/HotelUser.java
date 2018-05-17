@@ -117,6 +117,10 @@ public class HotelUser {
     public void setBookingList(List<Booking> bookingList) {
         this.bookingList = bookingList;
     }
+    
+    public void addBookingToBookingList(Booking booking) {
+    	this.bookingList.add(booking);
+    }
 
     public Payment getPayment() {
         return payment;
