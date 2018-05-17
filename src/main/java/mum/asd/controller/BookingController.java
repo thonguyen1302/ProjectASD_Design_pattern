@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javafx.collections.FXCollections;
@@ -134,7 +135,7 @@ public class BookingController implements Initializable {
 	// Use for passing data from view book controller to booking controller
 	public void setServiceDirector(ServiceDirector serviceDirector) {
 		this.serviceDirector = serviceDirector;
-		ConcreteServiceBuilder concreteServiceBuilder = 
+		ConcreteServiceBuilder concreteServiceBuilder =
 						(ConcreteServiceBuilder)this.serviceDirector.getServiceBuilder();
 		
 		// Init user information to GUI
