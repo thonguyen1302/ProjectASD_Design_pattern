@@ -278,12 +278,15 @@ public class UserController implements Initializable{
 		cbRole.setItems(roles);
 		
 		userTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+
 		
 		setColumnProperties();
 		
 		// Add all users into table
 		loadUserDetails();
 	}
+
 
 
 	/*

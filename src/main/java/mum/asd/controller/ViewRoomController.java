@@ -9,10 +9,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import mum.asd.domain.*;
 import mum.asd.service.impl.RoomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -28,29 +33,31 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import mum.asd.Main;
 import mum.asd.config.StageManager;
-import mum.asd.domain.Address;
-import mum.asd.domain.BedType;
-import mum.asd.domain.Card;
-import mum.asd.domain.HotelUser;
-import mum.asd.domain.Payment;
-import mum.asd.domain.Room;
-import mum.asd.domain.RoomType;
-import mum.asd.domain.User;
 import mum.asd.domain.booking.ConcreteServiceBuilder;
 import mum.asd.domain.booking.ServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
-import mum.asd.view.FxmlView;
 
 @Controller
 public class ViewRoomController implements Initializable {
 
+	public TableColumn<Room, String> colAdults;
+	public TableColumn<Room, String> colChildren;
+	public TableColumn<Room, String> colRoomType;
+	public TableColumn<Room, String> colStatus;
+	public TableColumn<Room, String> colTax;
 	@Autowired
 	RoomServiceImpl roomService;
 
-	public TableView userTable;
-	public TableColumn colRoomNumber;
-	public TableColumn colPrice;
-	public TableColumn colBedType;
+	public List<Room> selectedRooms;
+
+	@FXML
+	public TableView<Room> roomTableView;
+	@FXML
+	public TableColumn<Room, String> colRoomNumber;
+	@FXML
+	public TableColumn<Room, String> colPrice;
+	@FXML
+	public TableColumn<Room, String> colBedType;
 	@FXML
 	private Label userId;
 
@@ -153,13 +160,59 @@ public class ViewRoomController implements Initializable {
 		List<Room> rooms = roomService.findAll();
 		roomListObservable.clear();
 		roomListObservable.addAll(rooms);
-		userTable.setItems(roomListObservable);
+		roomTableView.setItems(roomListObservable);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+        roomTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        setColumnProperties();
+        addSelectionListener();
+
 		loadRoomTable();
+	}
+
+    public List<Room> getSelectedRooms() {
+        return selectedRooms;
+    }
+
+    public void setSelectedRooms(List<Room> selectedRooms) {
+        this.selectedRooms = selectedRooms;
+    }
+
+    public void addSelectionListener(){
+        roomTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedRooms = roomTableView.getSelectionModel().getSelectedItems();
+//            System.out.println();
+                });
+    }
+
+
+    private void setColumnProperties() {
+		colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+		colBedType.setCellValueFactory(new PropertyValueFactory<>("bedType"));
+		colAdults.setCellValueFactory(new PropertyValueFactory<>("numberAdult"));
+		colChildren.setCellValueFactory(new PropertyValueFactory<>("numberChildren"));
+		colTax.setCellValueFactory(new PropertyValueFactory<>("tax"));
+		colRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+		colRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+        colStatus.setCellValueFactory(cellData -> {
+            boolean roomVailable = cellData.getValue().isRoomVailable();
+            String availableAsString;
+            if(roomVailable == true)
+            {
+                availableAsString = "Available";
+            }
+            else
+            {
+                availableAsString = "Occupated";
+            }
+
+            return new ReadOnlyStringWrapper(availableAsString);
+        });
+
 	}
 
 }
