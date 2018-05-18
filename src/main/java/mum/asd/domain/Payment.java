@@ -15,8 +15,18 @@ public class Payment {
     private float amount;
     @OneToMany
     private List<Card> cards = new ArrayList<>();
+    
+    public Payment() {
+    	
+    }
 
-    public long getId() {
+    public Payment(String type, float amount) {
+		super();
+		this.type = type;
+		this.amount = amount;
+	}
+
+	public long getId() {
         return id;
     }
 
