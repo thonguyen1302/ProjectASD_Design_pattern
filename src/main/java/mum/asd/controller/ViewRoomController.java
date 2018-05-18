@@ -13,9 +13,7 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mum.asd.domain.*;
 import mum.asd.service.impl.RoomServiceImpl;
@@ -29,7 +27,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import mum.asd.Main;
 import mum.asd.config.StageManager;
@@ -45,6 +42,11 @@ public class ViewRoomController extends ApplicationController implements Initial
 	public TableColumn<Room, String> colRoomType;
 	public TableColumn<Room, String> colStatus;
 	public TableColumn<Room, String> colTax;
+    public TextField startDate;
+	public TextField endDate;
+	public TextField totalRoomsSelected;
+	public TextField discount;
+	public Button pay;
 	@Autowired
 	RoomServiceImpl roomService;
 
@@ -71,79 +73,96 @@ public class ViewRoomController extends ApplicationController implements Initial
 	@Lazy
     @Autowired
     private StageManager stageManager;
-	
+
+	public TextField getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(TextField startDate) {
+		this.startDate = startDate;
+	}
+
 	@FXML
     private void pay(ActionEvent event) {
+
+		System.out.println("Pay button pressed");
+		List<Room> listSelectedRooms = getSelectedRooms();
+
+		String endDate = this.endDate.getText();
+		String startDate = this.startDate.getText();
+		int totalRoomSelected = Integer.parseInt(this.totalRoomsSelected.getText());
+//		int discount = currentUser.getPromotions();
+
 		
 		// Init data for testing
-		HotelUser user = new HotelUser();
-		user.setFirstName("Vy");
-		user.setLastName("Nguyen");
-		user.setEmail("vynguyenlc@gmail.com");
-		user.setAddress(new Address("1000 N 4th St", "FF", "Iowa", "52557"));
-		
-		Payment payment = new Payment();
-		payment.setId(1);
-		Card card1 = new Card();
-		card1.setCardNumber("123456789");
-		card1.setPinNumber("112");
-		card1.setHoldername("Le Cat Vy Nguyen");
-		
-		Card card2 = new Card();
-		card2.setCardNumber("987654321");
-		card2.setPinNumber("333");
-		card2.setHoldername("Vy Nguyen");
-		
-		String sDate1="31/12/1998";
-		Date date1 = null;
-		try {
-			date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		card1.setExpiredDate(date1);
-		card2.setExpiredDate(date1);
-		
-		payment.addCard(card1);
-		payment.addCard(card2);
-		user.setPayment(payment);
-		
-		// List rooms is booked
-		Room r1 = new Room(BedType.Double.toString(), 2, 2, 7, true, 001, 130, RoomType.Deluxe);
-		r1.setId(1);
-		Room r2 = new Room(BedType.Twin.toString(), 2, 2, 8, true, 002, 120, RoomType.Standard);
-		r2.setId(2);
-		Room r3 = new Room(BedType.Single.toString(), 2, 2, 5, true, 003, 140, RoomType.Suite);
-		r3.setId(3);
-		Room r4 = new Room(BedType.Double.toString(), 2, 2, 7, true, 004, 110, RoomType.Deluxe);
-		r4.setId(4);
-		List<Room> lstRooms = new ArrayList<Room>();
-		lstRooms.add(r1); lstRooms.add(r2); lstRooms.add(r3); lstRooms.add(r4);
-		
-		ServiceBuilder serviceBuilder = new ConcreteServiceBuilder(user);
-		ServiceDirector serviceDirector = new ServiceDirector(serviceBuilder);
-		serviceDirector.createBooking(date1, date1);
-		serviceDirector.setRoomsToBooking(lstRooms);
-		   
-		try {
-			// call booking form
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Booking.fxml"));
-			
-			Parent root = (Parent)fxmlLoader.load();
-			
-			BookingController controller = fxmlLoader.<BookingController>getController();
-			controller.setServiceDirector(serviceDirector);
-			Scene scene = new Scene(root); 
-			Stage stage = Main.getPrimaryStage();
-			stage.setScene(scene);    
-
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//stageManager.switchScene(FxmlView.BOOKING);   
+//		HotelUser user = new HotelUser();
+//		user.setFirstName("Vy");
+//		user.setLastName("Nguyen");
+//		user.setEmail("vynguyenlc@gmail.com");
+//		user.setAddress(new Address("1000 N 4th St", "FF", "Iowa", "52557"));
+//
+//		Payment payment = new Payment();
+//		payment.setId(1);
+//		Card card1 = new Card();
+//		card1.setCardNumber("123456789");
+//		card1.setPinNumber("112");
+//		card1.setHoldername("Le Cat Vy Nguyen");
+//
+//		Card card2 = new Card();
+//		card2.setCardNumber("987654321");
+//		card2.setPinNumber("333");
+//		card2.setHoldername("Vy Nguyen");
+//
+//		String sDate1="31/12/1998";
+//		Date date1 = null;
+//		try {
+//			date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+//		} catch (ParseException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		card1.setExpiredDate(date1);
+//		card2.setExpiredDate(date1);
+//
+//		payment.addCard(card1);
+//		payment.addCard(card2);
+//		user.setPayment(payment);
+//
+//		// List rooms is booked
+//		Room r1 = new Room(BedType.Double.toString(), 2, 2, 7, true, 001, 130, RoomType.Deluxe);
+//		r1.setId(1);
+//		Room r2 = new Room(BedType.Twin.toString(), 2, 2, 8, true, 002, 120, RoomType.Standard);
+//		r2.setId(2);
+//		Room r3 = new Room(BedType.Single.toString(), 2, 2, 5, true, 003, 140, RoomType.Suite);
+//		r3.setId(3);
+//		Room r4 = new Room(BedType.Double.toString(), 2, 2, 7, true, 004, 110, RoomType.Deluxe);
+//		r4.setId(4);
+//		List<Room> lstRooms = new ArrayList<Room>();
+//		lstRooms.add(r1); lstRooms.add(r2); lstRooms.add(r3); lstRooms.add(r4);
+//
+//		ServiceBuilder serviceBuilder = new ConcreteServiceBuilder(user);
+//		ServiceDirector serviceDirector = new ServiceDirector(serviceBuilder);
+//		serviceDirector.createBooking(date1, date1);
+//		serviceDirector.setRoomsToBooking(lstRooms);
+//
+//		try {
+//			// call booking form
+//			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Booking.fxml"));
+//
+//			Parent root = (Parent)fxmlLoader.load();
+//
+//			BookingController controller = fxmlLoader.<BookingController>getController();
+//			controller.setServiceDirector(serviceDirector);
+//			Scene scene = new Scene(root);
+//			Stage stage = Main.getPrimaryStage();
+//			stage.setScene(scene);
+//
+//			stage.show();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		//stageManager.switchScene(FxmlView.BOOKING);
 	}
 	
 	@FXML

@@ -16,6 +16,19 @@ public class Card {
     private String holdername;
     @Temporal(TemporalType.TIMESTAMP)
     private Date expiredDate;
+    private String expiredDateS;
+
+    public String getHoldername() {
+        return holdername;
+    }
+
+    public String getExpiredDateS() {
+        return expiredDateS;
+    }
+
+    public void setExpiredDateS(String expiredDateS) {
+        this.expiredDateS = expiredDateS;
+    }
 
     public long getId() {
         return id;
