@@ -47,14 +47,15 @@ public class SampleDataService {
     }
 
     public void addSampleRoom(){
-        addRoom("Grand", 7.6f, 300, 2, 2, true);
-        addRoom("GrandQueen", 7f, 350, 2, 2, true);
-        addRoom("GrandWest", 7.1f, 310, 2, 2, true);
-        addRoom("GrandBeach", 7.2f, 320, 2, 2, true);
-        addRoom("GrandHill", 7.3f, 280, 2, 2, true);
+
+        addRoom(101,"Grand", 7.6f, 300, 2, 2, true);
+        addRoom(102,"GrandQueen", 7f, 350, 2, 2, true);
+        addRoom(103,"GrandWest", 7.1f, 310, 2, 2, true);
+        addRoom(201,"GrandBeach", 7.2f, 320, 2, 2, true);
+        addRoom(202,"GrandHill", 7.3f, 280, 2, 2, true);
     }
 
-    public void addRoom(String bedType, float tax, int price, int numChildren, int numAdult, boolean isVailable){
+    public void addRoom(int roomNumber, String bedType, float tax, int price, int numChildren, int numAdult, boolean isVailable){
         Room room = new Room();
         room.setTax(tax);
         room.setPrice(price);

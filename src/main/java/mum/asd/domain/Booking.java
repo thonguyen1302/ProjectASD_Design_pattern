@@ -25,6 +25,25 @@ public class Booking {
     private List<Room> rooms = new ArrayList<Room>();
     private Boolean checkInStatus;
     private Boolean checkOutStatus;
+    private String startDate_S;
+
+    public String getStartDate_S() {
+        return startDate_S;
+    }
+
+    public void setStartDate_S(String startDate_S) {
+        this.startDate_S = startDate_S;
+    }
+
+    public String getEndDate_S() {
+        return endDate_S;
+    }
+
+    public void setEndDate_S(String endDate_S) {
+        this.endDate_S = endDate_S;
+    }
+
+    private String endDate_S;
     @OneToOne
     private Payment payment;
     
