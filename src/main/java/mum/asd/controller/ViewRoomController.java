@@ -115,7 +115,13 @@ public class ViewRoomController extends ApplicationController implements Initial
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		HotelUser user = new HotelUser();
+		user.setFirstName("Vy");
+		user.setLastName("Nguyen");
+		user.setEmail("vynguyenlc@gmail.com");
+		user.setAddress(new Address("1000 N 4th St", "FF", "Iowa", "52557"));
 		
+		currentUser = user; 
 	}
 
 }
