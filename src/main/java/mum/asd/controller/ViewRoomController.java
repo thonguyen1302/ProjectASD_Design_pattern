@@ -91,7 +91,7 @@ public class ViewRoomController extends ApplicationController implements Initial
 		String endDate = this.endDate.getText();
 		String startDate = this.startDate.getText();
 		int totalRoomSelected = Integer.parseInt(this.totalRoomsSelected.getText());
-		int discount = currentUser.getPromotions();
+//		int discount = currentUser.getPromotions();
 
 		
 		// Init data for testing
