@@ -9,7 +9,10 @@ import mum.asd.domain.Card;
 import mum.asd.repository.CardRepository;
 import mum.asd.service.CardService;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class CardServiceImpl implements CardService {
 	
 	@Autowired

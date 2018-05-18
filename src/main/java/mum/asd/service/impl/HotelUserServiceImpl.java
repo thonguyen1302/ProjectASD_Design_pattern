@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 import mum.asd.service.HotelUserService;
 import mum.asd.service.UserService;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class HotelUserServiceImpl implements HotelUserService {
 	
 	@Autowired
@@ -55,6 +58,11 @@ public class HotelUserServiceImpl implements HotelUserService {
 		if(user == null){
 			return false;
 		}else{
+			if (user.getPayment()!=null){
+				if (user.getPayment().getCards()!=null){
+					user.getPayment().getCards().size();
+				}
+			}
 			if(password.equals(user.getPassword())) {
 				ApplicationController.currentUser = user;
 				return true;

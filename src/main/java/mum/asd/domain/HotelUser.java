@@ -1,5 +1,7 @@
 package mum.asd.domain;
 
+import org.hibernate.annotations.IndexColumn;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +23,20 @@ public class HotelUser {
     private Address address;
     private String email;
     private String credit;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Payment payment;
     @OneToMany
     private List<Booking> bookingList = new ArrayList<>();
     @Enumerated
     private UserType userType;
+//    @OneToMany
     @OneToMany(fetch = FetchType.EAGER)
-    private List<Promotion> promotions = new ArrayList<>();
+    @IndexColumn(name="id")
+    private List<Promotion> promotions;
+
+    public HotelUser() {
+        promotions = new ArrayList<>();
+    }
 
     public long getId() {
         return id;

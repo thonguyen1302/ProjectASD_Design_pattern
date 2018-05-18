@@ -27,6 +27,9 @@ public class Booking {
     private Boolean checkOutStatus;
     private String startDate_S;
 
+    public Booking() {
+    }
+
     public String getStartDate_S() {
         return startDate_S;
     }

@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
+import mum.asd.domain.HotelUser;
+import mum.asd.domain.Payment;
+import mum.asd.service.ApplicationContextHolder;
+import mum.asd.service.CardService;
+import mum.asd.service.PaymentService;
 import org.springframework.stereotype.Controller;
 
 import javafx.collections.FXCollections;
@@ -35,11 +40,14 @@ import mum.asd.domain.booking.ConcreteServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
 import mum.asd.domain.bookingprices.ServiceElementDoVisitor;
 
+import javax.transaction.Transactional;
+
 /**
  * @author vynguyen
  *
  */
 @Controller
+@Transactional
 public class BookingController extends ApplicationController implements Initializable {
 	private ServiceDirector serviceDirector;
 	
@@ -164,9 +172,11 @@ public class BookingController extends ApplicationController implements Initiali
 		
 		// Show list cards of user if have
 		List<String> numCard = new ArrayList<>();
-		concreteServiceBuilder.getUser().getPayment();
-		concreteServiceBuilder.getUser().getPayment().getCards();
-		for (Card c : concreteServiceBuilder.getUser().getPayment().getCards()) {
+		HotelUser hotelUser = concreteServiceBuilder.getUser();
+		Payment payment = hotelUser.getPayment();
+		PaymentService paymentService = ApplicationContextHolder.getContext().getBean(PaymentService.class);
+		List<Card> cards = paymentService.getListCardsByPayment(payment);
+		for (Card c : cards) {
 			String cardNumber = c.getCardNumber();
 			numCard.add("xxxxxx" + cardNumber.substring(0, cardNumber.length() - 5));
 		}
@@ -178,13 +188,15 @@ public class BookingController extends ApplicationController implements Initiali
 		List<Room> lstRoom = concreteServiceBuilder.getBooking().getRooms();
 		Double discountPercent = 0.0;
 		// Verify discount
-		if (lstRoom.size() > 2 && lstRoom.size() < 5) {
-			discountPercent = 0.1;
-		} else if (lstRoom.size() > 5) {
-			discountPercent = 0.3;
-		}
-		this.discount.setText(String.valueOf(discountPercent));
-		
+		if (lstRoom != null){
+			if (lstRoom.size() > 2 && lstRoom.size() < 5) {
+				discountPercent = 0.1;
+			} else if (lstRoom.size() > 5) {
+				discountPercent = 0.3;
+			}
+			this.discount.setText(String.valueOf(discountPercent));
+
+
 		// Count total price using visitor pattern
 		ServiceElementDoVisitor serviceElementVisitor = new ServiceElementDoVisitor();
 		for (Room r : lstRoom) {
@@ -227,7 +239,7 @@ public class BookingController extends ApplicationController implements Initiali
 			data.clear();
 			data.addAll(lstRoom);
 			roomsTable.setItems(data);
-		
+		}
 	}
 	
 	public ServiceDirector getServiceDirector() {

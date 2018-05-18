@@ -11,12 +11,15 @@ import mum.asd.service.BookingService;
 import mum.asd.service.HotelUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
+
 /**
  * @author vynguyen
  *
  */
 //@Component
 //@Configurable
+	@Transactional
 public class ConcreteServiceBuilder implements ServiceBuilder {
 //	@Autowired
 	private HotelUser user;
@@ -58,9 +61,13 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 		//currentUser.addBookingToBookingList(this.booking);
 		this.user.addBookingToBookingList(this.booking);
 		userService.save(this.user);
+		user.getPayment().getCards().size();
 	}
 
 	public HotelUser getUser() {
+		HotelUserService userService = ApplicationContextHolder.getContext().getBean(HotelUserService.class);
+		user = userService.findByEmail(user.getEmail());
+//		user.getPayment().getCards().size();
 		return user;
 	}
 
