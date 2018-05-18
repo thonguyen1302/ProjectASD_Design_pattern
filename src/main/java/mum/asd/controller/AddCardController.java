@@ -99,7 +99,7 @@ public class AddCardController extends ApplicationController implements Initiali
 		paymentService.save(payment);
 		
 		// Back to booking layout
-		goToBookingLayout();
+		goToBookingLayout(this.serviceDirector);
 	}
 	
 	public void setServiceDirector(ServiceDirector serviceDirector) {
@@ -109,30 +109,12 @@ public class AddCardController extends ApplicationController implements Initiali
 	@FXML
     private void cancel(ActionEvent event) {
 		// call booking form
-		goToBookingLayout();
+		goToBookingLayout(this.serviceDirector);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		this.cardType.getItems().addAll("Normal", "Debit", "Credit");
-	}
-	
-	private void goToBookingLayout() {
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Booking.fxml"));
-			
-			Parent root = (Parent)fxmlLoader.load();
-			BookingController controller = fxmlLoader.<BookingController>getController();
-			controller.setServiceDirector(this.serviceDirector);
-			Scene scene = new Scene(root); 
-			Stage stage = Main.getPrimaryStage();
-			stage.setScene(scene);    
-			
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
