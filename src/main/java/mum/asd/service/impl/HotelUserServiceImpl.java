@@ -2,6 +2,7 @@ package mum.asd.service.impl;
 
 import java.util.List;
 
+import mum.asd.controller.ApplicationController;
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.User;
 import mum.asd.repository.HotelUserRepository;
@@ -54,7 +55,10 @@ public class HotelUserServiceImpl implements HotelUserService {
 		if(user == null){
 			return false;
 		}else{
-			if(password.equals(user.getPassword())) return true;
+			if(password.equals(user.getPassword())) {
+				ApplicationController.currentUser = user;
+				return true;
+			} 
 			else return false;
 		}
 	}

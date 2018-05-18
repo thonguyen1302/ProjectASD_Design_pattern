@@ -1,14 +1,43 @@
 package mum.asd.controller;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import mum.asd.Main;
+import mum.asd.config.StageManager;
+import mum.asd.domain.HotelUser;
 import mum.asd.domain.User;
+import mum.asd.view.FxmlView;
 
 public class ApplicationController {
+	public static HotelUser currentUser = null;
+	
+	@Lazy
+    @Autowired
+    public StageManager stageManager;
+	
+	/*
+	 * Show user info
+	 * Tan Tho Nguyen
+	 */
+	
+	
+	public void showUserInfo() {
+		stageManager.switchScene(FxmlView.USERINFO);
+	}
+	
+
 	
 	/*
 	 * Get String From Resource Bundle

@@ -37,7 +37,7 @@ import mum.asd.domain.booking.ServiceDirector;
 import mum.asd.view.FxmlView;
 
 @Controller
-public class ViewRoomController implements Initializable {
+public class ViewRoomController extends ApplicationController implements Initializable {
 	
 	@FXML
 	private Label userId;
@@ -137,7 +137,13 @@ public class ViewRoomController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		HotelUser user = new HotelUser();
+		user.setFirstName("Vy");
+		user.setLastName("Nguyen");
+		user.setEmail("vynguyenlc@gmail.com");
+		user.setAddress(new Address("1000 N 4th St", "FF", "Iowa", "52557"));
 		
+		currentUser = user; 
 	}
 
 }

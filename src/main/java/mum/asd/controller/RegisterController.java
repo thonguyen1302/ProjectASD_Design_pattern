@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import javafx.event.ActionEvent;
@@ -15,12 +16,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import mum.asd.config.StageManager;
 import mum.asd.domain.Address;
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.User;
 import mum.asd.service.AddressService;
 import mum.asd.service.HotelUserService;
 import mum.asd.service.UserService;
+import mum.asd.view.FxmlView;
 
 /**
  * @author Tan Tho Nguyen
@@ -105,6 +108,8 @@ public class RegisterController extends ApplicationController implements Initial
 			hotelUserService.save(hotelUser);
 			
 			showAlert(getStringFromResourceBundle("register.successful"));
+			
+			stageManager.switchScene(FxmlView.LOGIN);
     	}
     }
 	
