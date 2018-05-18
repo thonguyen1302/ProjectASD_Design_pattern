@@ -9,6 +9,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import mum.asd.service.impl.RoomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -38,10 +43,19 @@ import mum.asd.view.FxmlView;
 
 @Controller
 public class ViewRoomController implements Initializable {
-	
+
+	@Autowired
+	RoomServiceImpl roomService;
+
+	public TableView userTable;
+	public TableColumn colRoomNumber;
+	public TableColumn colPrice;
+	public TableColumn colBedType;
 	@FXML
 	private Label userId;
-	
+
+
+	private ObservableList<Room> roomListObservable = FXCollections.observableArrayList();
 	@FXML
     private void exit(ActionEvent event) {
 		
@@ -135,10 +149,17 @@ public class ViewRoomController implements Initializable {
 		
 	}
 
+	public void loadRoomTable(){
+		List<Room> rooms = roomService.findAll();
+		roomListObservable.clear();
+		roomListObservable.addAll(rooms);
+		userTable.setItems(roomListObservable);
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+		loadRoomTable();
 	}
 
 }
