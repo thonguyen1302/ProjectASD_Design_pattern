@@ -47,12 +47,13 @@ public class SampleDataService {
     }
 
     public void addSampleRoom(){
-
-        addRoom(101,"Grand", 7.6f, 300, 2, 2, true);
-        addRoom(102,"GrandQueen", 7f, 350, 2, 2, true);
-        addRoom(103,"GrandWest", 7.1f, 310, 2, 2, true);
-        addRoom(201,"GrandBeach", 7.2f, 320, 2, 2, true);
-        addRoom(202,"GrandHill", 7.3f, 280, 2, 2, true);
+        if (roomRepository.findAll().size() == 0){
+            addRoom(101,"Grand", 7.6f, 300, 2, 2, true);
+            addRoom(102,"GrandQueen", 7f, 350, 2, 2, true);
+            addRoom(103,"GrandWest", 7.1f, 310, 2, 2, true);
+            addRoom(201,"GrandBeach", 7.2f, 320, 2, 2, true);
+            addRoom(202,"GrandHill", 7.3f, 280, 2, 2, true);
+        }
     }
 
     public void addRoom(int roomNumber, String bedType, float tax, int price, int numChildren, int numAdult, boolean isVailable){
@@ -67,10 +68,12 @@ public class SampleDataService {
     }
 
     public void addSampleBooking(){
-        addBooking("123", true, false, new Date(), new Date());
-        addBooking("124", true, false, new Date(), new Date());
-        addBooking("125", true, false, new Date(), new Date());
-        addBooking("126", true, false, new Date(), new Date());
+        if (bookingRepository.findAll().size()==0){
+            addBooking("123", true, false, new Date(), new Date());
+            addBooking("124", true, false, new Date(), new Date());
+            addBooking("125", true, false, new Date(), new Date());
+            addBooking("126", true, false, new Date(), new Date());
+        }
     }
 
     public void addBooking(String bookingNumber, boolean checkInStatus, boolean checkOutStatus, Date endDate, Date startDate){
@@ -84,11 +87,12 @@ public class SampleDataService {
     }
 
     public void addSamplePromotion(){
-        addPromotion("SpringHoliday", 15, 20);
-        addPromotion("FallHoliday", 10, 25);
-        addPromotion("SummerHoliday", 25, 10);
-        addPromotion("WinterHoliday", 5, 5);
-
+        if (promotionRepository.findAll().size()==0){
+            addPromotion("SpringHoliday", 15, 20);
+            addPromotion("FallHoliday", 10, 25);
+            addPromotion("SummerHoliday", 25, 10);
+            addPromotion("WinterHoliday", 5, 5);
+        }
     }
 
     public boolean addPromotion(String name, int discount, float percent){
@@ -103,19 +107,20 @@ public class SampleDataService {
     }
 
     public void addSampleAddress(){
-        Address address = new Address();
-        address.setCity("Fairfield");
-        address.setState("IOWA");
-        address.setStreet("4th Street");
-        address.setZipcode("52557");
-        addressRepository.save(address);
-        address = new Address();
-        address.setCity("Fairfield");
-        address.setState("IOWA");
-        address.setStreet("1302 S Main Street");
-        address.setZipcode("52556");
-        addressRepository.save(address);
-
+        if (addressRepository.findAll().size() == 0){
+            Address address = new Address();
+            address.setCity("Fairfield");
+            address.setState("IOWA");
+            address.setStreet("4th Street");
+            address.setZipcode("52557");
+            addressRepository.save(address);
+            address = new Address();
+            address.setCity("Fairfield");
+            address.setState("IOWA");
+            address.setStreet("1302 S Main Street");
+            address.setZipcode("52556");
+            addressRepository.save(address);
+        }
     }
 
 }
