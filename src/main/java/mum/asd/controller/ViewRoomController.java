@@ -1,6 +1,5 @@
 package mum.asd.controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,13 +14,8 @@ import org.springframework.stereotype.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import mum.asd.Main;
 import mum.asd.config.StageManager;
 import mum.asd.domain.Address;
 import mum.asd.domain.BedType;
@@ -30,14 +24,12 @@ import mum.asd.domain.HotelUser;
 import mum.asd.domain.Payment;
 import mum.asd.domain.Room;
 import mum.asd.domain.RoomType;
-import mum.asd.domain.User;
 import mum.asd.domain.booking.ConcreteServiceBuilder;
 import mum.asd.domain.booking.ServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
-import mum.asd.view.FxmlView;
 
 @Controller
-public class ViewRoomController implements Initializable {
+public class ViewRoomController extends ApplicationController implements Initializable {
 	
 	@FXML
 	private Label userId;
@@ -105,23 +97,8 @@ public class ViewRoomController implements Initializable {
 		serviceDirector.createBooking(date1, date1);
 		serviceDirector.setRoomsToBooking(lstRooms);
 		   
-		try {
-			// call booking form
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Booking.fxml"));
-			
-			Parent root = (Parent)fxmlLoader.load();
-			
-			BookingController controller = fxmlLoader.<BookingController>getController();
-			controller.setServiceDirector(serviceDirector);
-			Scene scene = new Scene(root); 
-			Stage stage = Main.getPrimaryStage();
-			stage.setScene(scene);    
-
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		goToBookingLayout(serviceDirector);
+		
 		//stageManager.switchScene(FxmlView.BOOKING);   
 	}
 	

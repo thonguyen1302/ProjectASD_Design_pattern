@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -123,7 +124,8 @@ public class BookingController extends ApplicationController implements Initiali
 		if (this.cardNumber.getValue() != null) {
 			this.serviceDirector.getServiceBuilder().saveBooking();
 		} else {
-			showAlert(getStringFromResourceBundle("booking.warning"));
+			showAlert(ResourceBundle.getBundle("Bundle").getString("booking.warning"), 
+							AlertType.WARNING);
 		}
 	}
 	
@@ -139,24 +141,7 @@ public class BookingController extends ApplicationController implements Initiali
 	
 	@FXML
     private void addNewCard(ActionEvent event) {
-		
-		try {
-			// call booking form
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddCard.fxml"));
-			
-			Parent root = (Parent)fxmlLoader.load();
-			
-			AddCardController controller = fxmlLoader.<AddCardController>getController();
-			controller.setServiceDirector(serviceDirector);
-			Scene scene = new Scene(root); 
-			Stage stage = Main.getPrimaryStage();
-			stage.setScene(scene);    
-
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		gotoAddCardLayout(this.serviceDirector);
 	}
 
 	@Override
