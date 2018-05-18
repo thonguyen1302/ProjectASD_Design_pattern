@@ -38,6 +38,15 @@ public class ApplicationController {
 	public void showUserInfo() {
 		stageManager.switchScene(FxmlView.USERINFO);
 	}
+
+
+	/*
+	 * Logout
+	 * Tan Tho Nguyen
+	 */
+    private void logout() {
+    	stageManager.switchScene(FxmlView.LOGIN);
+	}
 	
 
 	
