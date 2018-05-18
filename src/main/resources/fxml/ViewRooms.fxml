@@ -36,12 +36,9 @@
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Profile">
           	<items>
-              <!--<MenuItem mnemonicParsing="false" text="User info" onAction="#showUserInfo" />-->
-            </items>
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="User info" onAction="#showUserInfo" />
             </items>
           </Menu>
         </menus>

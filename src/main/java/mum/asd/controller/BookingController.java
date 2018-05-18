@@ -116,7 +116,7 @@ public class BookingController extends ApplicationController implements Initiali
 	
 	@FXML
     private void cancel(ActionEvent event) {
-		
+		goToViewRoomLayout();
 	}
 	
 	@FXML
@@ -167,7 +167,7 @@ public class BookingController extends ApplicationController implements Initiali
 		for (Card c : concreteServiceBuilder.getUser().getPayment().getCards()) {
 			String cardNumber = c.getCardNumber();
 			numCard.add("xxxxxx" + cardNumber.substring(0, cardNumber.length() - 5));
-		} // need to process card and payment
+		}
 		
 		this.cardNumber.getItems().addAll(numCard);
 		this.startDate.setText(concreteServiceBuilder.getBooking().getStartDate().toString());
@@ -199,10 +199,10 @@ public class BookingController extends ApplicationController implements Initiali
 		// Load list room to table view
 		//List<Room> lstRoom = concreteServiceBuilder.getBooking().getRooms();
 		ObservableList<Room> data = FXCollections.observableArrayList(lstRoom);
-		this.roomsTable = new TableView<Room>(data);
-		this.colRoomNumber = new TableColumn<>("Room No");
-		colRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
-		roomsTable.getColumns().add(colRoomNumber);
+		//this.roomsTable = new TableView<Room>(data);
+		//this.colRoomNumber = new TableColumn<>("Room No");
+		//colRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+		//roomsTable.getColumns().add(colRoomNumber);
 		/*roomsTable.getColumns().add(colPrice);
 		roomsTable.getColumns().add(colBedType);
 		roomsTable.getColumns().add(colAdults);
@@ -210,17 +210,21 @@ public class BookingController extends ApplicationController implements Initiali
 		roomsTable.getColumns().add(colRoomType);
 		roomsTable.getColumns().add(colStatus);*/
 		
-		this.roomsTable.setItems(data);
+		//this.roomsTable.setItems(data);
 		//for (Room r : lstRoom) {
-//			colRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
-//			colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-//			colBedType.setCellValueFactory(new PropertyValueFactory<>("bedType"));
-//			colAdults.setCellValueFactory(new PropertyValueFactory<>("numberAdult"));
-//			colChildren.setCellValueFactory(new PropertyValueFactory<>("numberChildren"));
-//			colRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
-//			colStatus.setCellValueFactory(new PropertyValueFactory<>("isRoomVailable"));
-//			colTax.setCellValueFactory(new PropertyValueFactory<>("tax"));
+			colRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+			colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+			colBedType.setCellValueFactory(new PropertyValueFactory<>("bedType"));
+			colAdults.setCellValueFactory(new PropertyValueFactory<>("numberAdult"));
+			colChildren.setCellValueFactory(new PropertyValueFactory<>("numberChildren"));
+			colRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+			colStatus.setCellValueFactory(new PropertyValueFactory<>("isRoomVailable"));
+			colTax.setCellValueFactory(new PropertyValueFactory<>("tax"));
 		//}
+			
+			data.clear();
+			data.addAll(lstRoom);
+			roomsTable.setItems(data);
 		
 	}
 	
