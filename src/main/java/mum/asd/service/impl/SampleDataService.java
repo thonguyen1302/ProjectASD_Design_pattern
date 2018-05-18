@@ -1,9 +1,6 @@
 package mum.asd.service.impl;
 
-import mum.asd.domain.Address;
-import mum.asd.domain.Booking;
-import mum.asd.domain.Promotion;
-import mum.asd.domain.Room;
+import mum.asd.domain.*;
 import mum.asd.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +41,23 @@ public class SampleDataService {
         addSamplePromotion();
         addSampleBooking();
         addSampleRoom();
+    }
+
+    public void addSampleUser(){
+
+    }
+
+    public void addUser(){
+        HotelUser hotelUser = new HotelUser();
+        hotelUser.setEmail("sang@acb.com");
+        hotelUser.setPassword("123");
+        hotelUser.setFirstName("Sang");
+        hotelUser.setLastName("Tran");
+//        hotelUser.set
+    }
+
+    public void addPayment(){
+
     }
 
     public void addSampleRoom(){
