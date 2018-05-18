@@ -31,7 +31,7 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 	}
 
 	@Override
-	public void createBooking(Date startDate, Date endDate) {
+	public void createBooking(String startDate, String endDate) {
 		// TODO Auto-generated method stub
 		String bookingNum = String.valueOf(new Date().getTime()/100);
 		this.booking = new Booking(startDate, endDate);

@@ -170,8 +170,8 @@ public class BookingController extends ApplicationController implements Initiali
 		}
 		
 		this.cardNumber.getItems().addAll(numCard);
-		this.startDate.setText(concreteServiceBuilder.getBooking().getStartDate().toString());
-		this.endDate.setText(concreteServiceBuilder.getBooking().getEndDate().toString());
+		this.startDate.setText(concreteServiceBuilder.getBooking().getStartDate_S());
+		this.endDate.setText(concreteServiceBuilder.getBooking().getEndDate_S());
 		
 		List<Room> lstRoom = concreteServiceBuilder.getBooking().getRooms();
 		Double discountPercent = 0.0;

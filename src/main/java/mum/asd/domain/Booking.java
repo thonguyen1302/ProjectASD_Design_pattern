@@ -47,6 +47,16 @@ public class Booking {
     @OneToOne
     private Payment payment;
     
+    public Booking(String startDate, String endDate) {
+		super();
+		this.startDate_S = startDate;
+		this.endDate_S = endDate;
+		
+		// Generate booking number
+		LocalDate lDate = LocalDate.now();
+		this.bookingNumber = lDate.toString();
+	}
+    
     public Booking(Date startDate, Date endDate) {
 		super();
 		this.startDate = startDate;

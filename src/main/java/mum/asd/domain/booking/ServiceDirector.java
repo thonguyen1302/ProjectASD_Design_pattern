@@ -25,7 +25,7 @@ public class ServiceDirector {
 		this.serviceBuilder = serviceBuilder;
 	}
 	
-	public void createBooking(Date startDate, Date endDate) {
+	public void createBooking(String startDate, String endDate) {
 		this.serviceBuilder.createBooking(startDate, endDate);
 	}
 	
