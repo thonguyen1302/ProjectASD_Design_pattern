@@ -2,9 +2,12 @@ package mum.asd.domain;
 
 import javax.persistence.*;
 
+import mum.asd.domain.bookingprices.ServiceElementVisitor;
+import mum.asd.domain.bookingprices.ServiceItem;
+
 @Entity
 @Table(name = "Room")
-public class Room {
+public class Room implements ServiceItem {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -117,4 +120,10 @@ public class Room {
     public void setRoomVailable(boolean roomVailable) {
         isRoomVailable = roomVailable;
     }
+
+	@Override
+	public void accept(ServiceElementVisitor serviceElementVisitor) {
+		// TODO Auto-generated method stub
+		serviceElementVisitor.visit(this);
+	}
 }

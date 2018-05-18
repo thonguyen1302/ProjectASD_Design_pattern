@@ -1,21 +1,24 @@
 package mum.asd.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -24,18 +27,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import mum.asd.Main;
 import mum.asd.domain.Card;
 import mum.asd.domain.Room;
 import mum.asd.domain.booking.ConcreteServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
-import mum.asd.service.BookingService;
+import mum.asd.domain.bookingprices.ServiceElementDoVisitor;
 
 /**
  * @author vynguyen
  *
  */
 @Controller
-public class BookingController implements Initializable {
+public class BookingController extends ApplicationController implements Initializable {
 	private ServiceDirector serviceDirector;
 	
 	@FXML
@@ -49,6 +54,9 @@ public class BookingController implements Initializable {
 	
 	@FXML
 	private ComboBox<String> cardNumber;
+	
+	@FXML
+	private Button addNewCard;
 	
 	@FXML
 	private TextField startDate;
@@ -100,10 +108,7 @@ public class BookingController implements Initializable {
 	
 	@FXML
     private MenuItem deleteRoom;
-	
-	@Autowired
-	private BookingService bookingService;
-	
+
 	@FXML
     private void exit(ActionEvent event) {
 		
@@ -116,7 +121,12 @@ public class BookingController implements Initializable {
 	
 	@FXML
     private void pay(ActionEvent event) {
-		this.serviceDirector.getServiceBuilder().saveBooking();
+		if (this.cardNumber.getValue() != null) {
+			this.serviceDirector.getServiceBuilder().saveBooking();
+		} else {
+			showAlert(ResourceBundle.getBundle("Bundle").getString("booking.warning"), 
+							AlertType.WARNING);
+		}
 	}
 	
 	@FXML
@@ -128,6 +138,11 @@ public class BookingController implements Initializable {
     private void deleteRoom(ActionEvent event) {
 		
 	}
+	
+	@FXML
+    private void addNewCard(ActionEvent event) {
+		gotoAddCardLayout(this.serviceDirector);
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -136,15 +151,18 @@ public class BookingController implements Initializable {
 
 	// Use for passing data from view book controller to booking controller
 	public void setServiceDirector(ServiceDirector serviceDirector) {
+		
+		// Using builder pattern to do booking action
 		this.serviceDirector = serviceDirector;
 		ConcreteServiceBuilder concreteServiceBuilder =
 						(ConcreteServiceBuilder)this.serviceDirector.getServiceBuilder();
 		
-		// Init user information to GUI
+		// Show user information to GUI
 		this.name.setText(concreteServiceBuilder.getUser().getFirstName() + 
 				" " + concreteServiceBuilder.getUser().getLastName());
 		this.address.setText(concreteServiceBuilder.getUser().getAddress().toString());
 		
+		// Show list cards of user if have
 		List<String> numCard = new ArrayList<>();
 		for (Card c : concreteServiceBuilder.getUser().getPayment().getCards()) {
 			String cardNumber = c.getCardNumber();
@@ -155,8 +173,31 @@ public class BookingController implements Initializable {
 		this.startDate.setText(concreteServiceBuilder.getBooking().getStartDate().toString());
 		this.endDate.setText(concreteServiceBuilder.getBooking().getEndDate().toString());
 		
-		// Count total price
 		List<Room> lstRoom = concreteServiceBuilder.getBooking().getRooms();
+		Double discountPercent = 0.0;
+		// Verify discount
+		if (lstRoom.size() > 2 && lstRoom.size() < 5) {
+			discountPercent = 0.1;
+		} else if (lstRoom.size() > 5) {
+			discountPercent = 0.3;
+		}
+		this.discount.setText(String.valueOf(discountPercent));
+		
+		// Count total price using visitor pattern
+		ServiceElementDoVisitor serviceElementVisitor = new ServiceElementDoVisitor();
+		for (Room r : lstRoom) {
+			r.accept(serviceElementVisitor);
+		}
+		double finalPrice = serviceElementVisitor.getPrice();
+		if (discountPercent > 0) {
+			finalPrice = finalPrice - (finalPrice * discountPercent);
+		}
+		
+		this.totalPrice.setText(String.valueOf(finalPrice));
+		
+		
+		// Load list room to table view
+		//List<Room> lstRoom = concreteServiceBuilder.getBooking().getRooms();
 		ObservableList<Room> data = FXCollections.observableArrayList(lstRoom);
 		this.roomsTable = new TableView<Room>(data);
 		this.colRoomNumber = new TableColumn<>("Room No");
