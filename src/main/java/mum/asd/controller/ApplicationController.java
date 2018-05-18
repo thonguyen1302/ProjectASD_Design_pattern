@@ -14,7 +14,7 @@ public class ApplicationController {
 	 * Get String From Resource Bundle
 	 * Tan Tho Nguyen
 	 */
-	String getStringFromResourceBundle(String key){
+	public String getStringFromResourceBundle(String key){
         return ResourceBundle.getBundle("Bundle").getString(key);
     }
 	

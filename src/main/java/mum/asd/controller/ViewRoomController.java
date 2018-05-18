@@ -62,6 +62,7 @@ public class ViewRoomController implements Initializable {
 		user.setAddress(new Address("1000 N 4th St", "FF", "Iowa", "52557"));
 		
 		Payment payment = new Payment();
+		payment.setId(1);
 		Card card1 = new Card();
 		card1.setCardNumber("123456789");
 		card1.setPinNumber("112");
