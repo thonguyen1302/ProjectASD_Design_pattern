@@ -54,6 +54,7 @@ public class Main extends Application {
      */
     protected void displayInitialScene() {
         stageManager.switchScene(FxmlView.VIEWROOMS);
+//        stageManager.switchScene(FxmlView.U®SER);
     }
 
     
