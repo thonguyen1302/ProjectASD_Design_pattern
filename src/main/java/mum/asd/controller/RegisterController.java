@@ -19,9 +19,11 @@ import javafx.scene.control.TextField;
 import mum.asd.config.StageManager;
 import mum.asd.domain.Address;
 import mum.asd.domain.HotelUser;
+import mum.asd.domain.Payment;
 import mum.asd.domain.User;
 import mum.asd.service.AddressService;
 import mum.asd.service.HotelUserService;
+import mum.asd.service.PaymentService;
 import mum.asd.service.UserService;
 import mum.asd.view.FxmlView;
 
@@ -76,6 +78,9 @@ public class RegisterController extends ApplicationController implements Initial
 	
 	@Autowired
 	private AddressService addressService;
+	
+	@Autowired
+	private PaymentService paymentService;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -103,7 +108,11 @@ public class RegisterController extends ApplicationController implements Initial
 			Address address = new Address(getStreet(), getCity(), getState(), getZipcode());
 			addressService.save(address);
 			
+			Payment payment = new Payment();
+			paymentService.save(payment);
+			
 			hotelUser.setAddress(address);
+			hotelUser.setPayment(payment);
 			
 			hotelUserService.save(hotelUser);
 			
