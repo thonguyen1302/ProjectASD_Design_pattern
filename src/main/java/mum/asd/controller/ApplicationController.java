@@ -158,7 +158,7 @@ public class ApplicationController {
 	 */
 	public void goToViewRoomLayout() {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ViewRoom.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ViewRooms.fxml"));
 			
 			Parent root = (Parent)fxmlLoader.load();
 			Scene scene = new Scene(root); 

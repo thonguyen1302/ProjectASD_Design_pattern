@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Controller;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -101,7 +102,7 @@ public class BookingController extends ApplicationController implements Initiali
 	private TableColumn<Room, String> colRoomType;
 	
 	@FXML
-    private TableColumn<Room, Boolean> colStatus;
+    private TableColumn<Room, String> colStatus;
 	
 	@FXML
 	private TableColumn<Room, String> colTax;
@@ -123,6 +124,9 @@ public class BookingController extends ApplicationController implements Initiali
     private void pay(ActionEvent event) {
 		if (this.cardNumber.getValue() != null) {
 			this.serviceDirector.getServiceBuilder().saveBooking();
+			showAlert(ResourceBundle.getBundle("Bundle").getString("booking.completed"), 
+					AlertType.INFORMATION);
+			goToViewRoomLayout();
 		} else {
 			showAlert(ResourceBundle.getBundle("Bundle").getString("booking.warning"), 
 							AlertType.WARNING);
@@ -163,13 +167,13 @@ public class BookingController extends ApplicationController implements Initiali
 		this.address.setText(concreteServiceBuilder.getUser().getAddress().toString());
 		
 		// Show list cards of user if have
-		List<String> numCard = new ArrayList<>();
+		/*List<String> numCard = new ArrayList<>();
 		for (Card c : concreteServiceBuilder.getUser().getPayment().getCards()) {
 			String cardNumber = c.getCardNumber();
 			numCard.add("xxxxxx" + cardNumber.substring(0, cardNumber.length() - 5));
-		}
+		}*/
 		
-		this.cardNumber.getItems().addAll(numCard);
+		//this.cardNumber.getItems().addAll(numCard);
 		this.startDate.setText(concreteServiceBuilder.getBooking().getStartDate_S());
 		this.endDate.setText(concreteServiceBuilder.getBooking().getEndDate_S());
 		
@@ -197,34 +201,32 @@ public class BookingController extends ApplicationController implements Initiali
 		
 		
 		// Load list room to table view
-		//List<Room> lstRoom = concreteServiceBuilder.getBooking().getRooms();
 		ObservableList<Room> data = FXCollections.observableArrayList(lstRoom);
-		//this.roomsTable = new TableView<Room>(data);
-		//this.colRoomNumber = new TableColumn<>("Room No");
-		//colRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
-		//roomsTable.getColumns().add(colRoomNumber);
-		/*roomsTable.getColumns().add(colPrice);
-		roomsTable.getColumns().add(colBedType);
-		roomsTable.getColumns().add(colAdults);
-		roomsTable.getColumns().add(colChildren);
-		roomsTable.getColumns().add(colRoomType);
-		roomsTable.getColumns().add(colStatus);*/
+		colRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+		colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+		colBedType.setCellValueFactory(new PropertyValueFactory<>("bedType"));
+		colAdults.setCellValueFactory(new PropertyValueFactory<>("numberAdult"));
+		colChildren.setCellValueFactory(new PropertyValueFactory<>("numberChildren"));
+		colRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+		colStatus.setCellValueFactory(cellData -> {
+            boolean roomVailable = cellData.getValue().isRoomVailable();
+            String availableAsString;
+            if(roomVailable == true)
+            {
+                availableAsString = "Available";
+            }
+            else
+            {
+                availableAsString = "Occupated";
+            }
+
+            return new ReadOnlyStringWrapper(availableAsString);
+        });
+		colTax.setCellValueFactory(new PropertyValueFactory<>("tax"));
 		
-		//this.roomsTable.setItems(data);
-		//for (Room r : lstRoom) {
-			colRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
-			colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-			colBedType.setCellValueFactory(new PropertyValueFactory<>("bedType"));
-			colAdults.setCellValueFactory(new PropertyValueFactory<>("numberAdult"));
-			colChildren.setCellValueFactory(new PropertyValueFactory<>("numberChildren"));
-			colRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
-			colStatus.setCellValueFactory(new PropertyValueFactory<>("isRoomVailable"));
-			colTax.setCellValueFactory(new PropertyValueFactory<>("tax"));
-		//}
-			
-			data.clear();
-			data.addAll(lstRoom);
-			roomsTable.setItems(data);
+		data.clear();
+		data.addAll(lstRoom);
+		roomsTable.setItems(data);
 		
 	}
 	

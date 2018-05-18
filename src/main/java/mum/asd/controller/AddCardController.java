@@ -75,7 +75,6 @@ public class AddCardController extends ApplicationController implements Initiali
 		card.setPinNumber(this.pinNumber.getText());
 		
 		String sDate = this.expDate.getText();
-		
 		card.setExpiredDateS(sDate);
 		
 		// Add card to database
