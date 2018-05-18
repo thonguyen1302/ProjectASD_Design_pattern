@@ -13,7 +13,7 @@ public class Payment {
 
     private String type;
     private float amount;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Card> cards = new ArrayList<>();
     
     public Payment() {

@@ -47,13 +47,15 @@ public class SampleDataService {
 
     }
 
-    public void addUser(){
+    public void addUser(String credit, String email, String firstName, String lastName, Gender gender, String password, String phone, UserType userType){
         HotelUser hotelUser = new HotelUser();
         hotelUser.setEmail("sang@acb.com");
         hotelUser.setPassword("123");
         hotelUser.setFirstName("Sang");
         hotelUser.setLastName("Tran");
-//        hotelUser.set
+        hotelUser.setPhone("99903813");
+        hotelUser.setGender(Gender.Male);
+        hotelUser.setUserType(UserType.Admin);
     }
 
     public void addPayment(){
