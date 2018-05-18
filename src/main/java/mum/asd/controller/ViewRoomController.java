@@ -98,7 +98,7 @@ public class ViewRoomController extends ApplicationController implements Initial
 		}
 		if (currentUser!=null){
 			List<Promotion> promotions = currentUser.getPromotions();
-			if (promotions.size()>0){
+			if (promotions != null && promotions.size()>0){
 				this.discount.setText(promotions.get(0).getName());
 			}
 		}
@@ -151,29 +151,16 @@ public class ViewRoomController extends ApplicationController implements Initial
 //		List<Room> lstRooms = new ArrayList<Room>();
 //		lstRooms.add(r1); lstRooms.add(r2); lstRooms.add(r3); lstRooms.add(r4);
 //
-//		ServiceBuilder serviceBuilder = new ConcreteServiceBuilder(user);
-//		ServiceDirector serviceDirector = new ServiceDirector(serviceBuilder);
-//		serviceDirector.createBooking(date1, date1);
-//		serviceDirector.setRoomsToBooking(lstRooms);
-//
-//		try {
-//			// call booking form
-//			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Booking.fxml"));
-//
-//			Parent root = (Parent)fxmlLoader.load();
-//
-//			BookingController controller = fxmlLoader.<BookingController>getController();
-//			controller.setServiceDirector(serviceDirector);
-//			Scene scene = new Scene(root);
-//			Stage stage = Main.getPrimaryStage();
-//			stage.setScene(scene);
-//
-//			stage.show();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		//stageManager.switchScene(FxmlView.BOOKING);
+		// Prepare data to send to booking layout
+		ServiceBuilder serviceBuilder = new ConcreteServiceBuilder(currentUser);
+		ServiceDirector serviceDirector = new ServiceDirector(serviceBuilder);
+		serviceDirector.createBooking(startDate, endDate);
+		serviceDirector.setRoomsToBooking(listSelectedRooms);
+		
+		// Go to booking layout
+		goToBookingLayout(serviceDirector);
+
+		//stageManager.switchScene(FxmlView.BOOKING);
 	}
 	
 	@FXML

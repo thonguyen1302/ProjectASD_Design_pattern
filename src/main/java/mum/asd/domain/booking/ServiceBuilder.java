@@ -10,7 +10,7 @@ import mum.asd.domain.Room;
  *
  */
 public interface ServiceBuilder {
-	public void createBooking(Date startDate, Date endDate);
+	public void createBooking(String startDate, String endDate);
 	public void setRoomsToBooking(List<Room> lstRoom);
 	public void saveBooking();
 }
