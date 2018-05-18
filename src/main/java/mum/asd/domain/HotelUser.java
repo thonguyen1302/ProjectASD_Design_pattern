@@ -17,7 +17,7 @@ public class HotelUser {
 //    private long address_id;
     @Enumerated
     private Gender gender;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Address address;
     private String email;
     private String credit;
@@ -27,7 +27,7 @@ public class HotelUser {
     private List<Booking> bookingList = new ArrayList<>();
     @Enumerated
     private UserType userType;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Promotion> promotions = new ArrayList<>();
 
     public long getId() {
