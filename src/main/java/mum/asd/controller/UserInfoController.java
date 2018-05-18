@@ -71,15 +71,14 @@ public class UserInfoController extends ApplicationController implements Initial
     	   validatePassword(getPassword(), getConfirmPassword())
     	   ){
     
-			HotelUser hotelUser = new HotelUser();
-			hotelUser.setEmail(getEmail());
-			hotelUser.setFirstName(getFirstName());
-			hotelUser.setLastName(getLastName());
-			hotelUser.setPhone(getPhone());
-			hotelUser.setPassword(getPassword());
+			currentUser.setEmail(getEmail());
+			currentUser.setFirstName(getFirstName());
+			currentUser.setLastName(getLastName());
+			currentUser.setPhone(getPhone());
+			currentUser.setPassword(getPassword());
 			
 			
-			hotelUserService.save(hotelUser);
+			hotelUserService.save(currentUser);
 			
 			showAlert(getStringFromResourceBundle("userinfo.successful"));
 			

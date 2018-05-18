@@ -38,7 +38,7 @@ import mum.asd.domain.booking.ServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
 
 @Controller
-public class ViewRoomController implements Initializable {
+public class ViewRoomController extends ApplicationController implements Initializable {
 
 	public TableColumn<Room, String> colAdults;
 	public TableColumn<Room, String> colChildren;
