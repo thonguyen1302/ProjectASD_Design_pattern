@@ -145,6 +145,27 @@ public class ApplicationController {
 	
 	/*
 	 * VyNguyen
+	 * Use for moving to ViewRoom layout
+	 */
+	public void goToViewRoomLayout() {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ViewRoom.fxml"));
+			
+			Parent root = (Parent)fxmlLoader.load();
+			Scene scene = new Scene(root); 
+			Stage stage = Main.getPrimaryStage();
+			stage.setScene(scene);
+			stage.setTitle(ResourceBundle.getBundle("Bundle").getString("viewrooms.title"));
+			
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/*
+	 * VyNguyen
 	 * User for moving to AddCard layout
 	 */
 	public void gotoAddCardLayout(ServiceDirector serviceDirector) {

@@ -82,6 +82,8 @@ public class ViewRoomController extends ApplicationController implements Initial
 		this.startDate = startDate;
 	}
 
+
+
 	@FXML
     private void pay(ActionEvent event) {
 
@@ -90,8 +92,17 @@ public class ViewRoomController extends ApplicationController implements Initial
 
 		String endDate = this.endDate.getText();
 		String startDate = this.startDate.getText();
-		int totalRoomSelected = Integer.parseInt(this.totalRoomsSelected.getText());
-//		int discount = currentUser.getPromotions();
+		if (listSelectedRooms!=null&&listSelectedRooms.size()>0){
+			int totalRoomSelected = Integer.parseInt(this.totalRoomsSelected.getText());
+			this.totalRoomsSelected.setText(totalRoomSelected+"");
+		}
+		if (currentUser!=null){
+			List<Promotion> promotions = currentUser.getPromotions();
+			if (promotions.size()>0){
+				this.discount.setText(promotions.get(0).getName());
+			}
+		}
+		System.out.println();
 
 		
 		// Init data for testing
@@ -205,6 +216,7 @@ public class ViewRoomController extends ApplicationController implements Initial
         roomTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             selectedRooms = roomTableView.getSelectionModel().getSelectedItems();
 //            System.out.println();
+			this.totalRoomsSelected.setText(selectedRooms.size()+"");
                 });
     }
 
