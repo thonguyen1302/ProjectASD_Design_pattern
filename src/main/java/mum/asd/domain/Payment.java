@@ -9,11 +9,11 @@ public class Payment {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
-    private long id;
+    private long id;  
 
     private String type;
     private float amount;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     private List<Card> cards = new ArrayList<>();
     
     public Payment() {
