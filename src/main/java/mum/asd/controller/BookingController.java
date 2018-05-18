@@ -164,6 +164,8 @@ public class BookingController extends ApplicationController implements Initiali
 		
 		// Show list cards of user if have
 		List<String> numCard = new ArrayList<>();
+		concreteServiceBuilder.getUser().getPayment();
+		concreteServiceBuilder.getUser().getPayment().getCards();
 		for (Card c : concreteServiceBuilder.getUser().getPayment().getCards()) {
 			String cardNumber = c.getCardNumber();
 			numCard.add("xxxxxx" + cardNumber.substring(0, cardNumber.length() - 5));
