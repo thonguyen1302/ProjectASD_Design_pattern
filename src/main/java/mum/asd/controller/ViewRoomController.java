@@ -35,7 +35,7 @@ import mum.asd.domain.booking.ServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
 
 @Controller
-public class ViewRoomController implements Initializable {
+public class ViewRoomController extends ApplicationController implements Initializable {
 
 	public TableColumn<Room, String> colAdults;
 	public TableColumn<Room, String> colChildren;
@@ -73,11 +73,26 @@ public class ViewRoomController implements Initializable {
 	@Lazy
     @Autowired
     private StageManager stageManager;
-	
+
+	public TextField getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(TextField startDate) {
+		this.startDate = startDate;
+	}
+
 	@FXML
     private void pay(ActionEvent event) {
 
 		System.out.println("Pay button pressed");
+		List<Room> listSelectedRooms = getSelectedRooms();
+
+		String endDate = this.endDate.getText();
+		String startDate = this.startDate.getText();
+		int totalRoomSelected = Integer.parseInt(this.totalRoomsSelected.getText());
+		int discount = currentUser.getPromotions();
+
 		
 		// Init data for testing
 //		HotelUser user = new HotelUser();
