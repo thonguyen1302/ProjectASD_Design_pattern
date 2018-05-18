@@ -52,10 +52,7 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 		bookingService.save(this.booking);
 		
 		// Save user to have relationship
-		//String email = this.user.getEmail();
 		HotelUserService userService = ApplicationContextHolder.getContext().getBean(HotelUserService.class);
-		//HotelUser currentUser = userService.findByEmail(email);
-		//currentUser.addBookingToBookingList(this.booking);
 		this.user.addBookingToBookingList(this.booking);
 		userService.save(this.user);
 	}

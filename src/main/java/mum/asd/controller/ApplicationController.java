@@ -44,7 +44,7 @@ public class ApplicationController {
 	 * Logout
 	 * Tan Tho Nguyen
 	 */
-    private void logout() {
+    public void logout() {
     	stageManager.switchScene(FxmlView.LOGIN);
 	}
 	

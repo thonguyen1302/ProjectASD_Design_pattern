@@ -74,15 +74,9 @@ public class AddCardController extends ApplicationController implements Initiali
 		card.setHoldername(this.cardHolder.getText());
 		card.setPinNumber(this.pinNumber.getText());
 		
-		String sDate1 = this.expDate.getText();
-		Date date1 = null;
-		try {
-			date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		card.setExpiredDate(date1);
+		String sDate = this.expDate.getText();
+		
+		card.setExpiredDateS(sDate);
 		
 		// Add card to database
 		cardService = ApplicationContextHolder.getContext().getBean(CardService.class);
