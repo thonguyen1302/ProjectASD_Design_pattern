@@ -21,6 +21,7 @@ import mum.asd.domain.Address;
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.Payment;
 import mum.asd.domain.User;
+import mum.asd.domain.proxy.RegisterProxy;
 import mum.asd.service.AddressService;
 import mum.asd.service.HotelUserService;
 import mum.asd.service.PaymentService;
@@ -77,6 +78,9 @@ public class RegisterController extends ApplicationController implements Initial
 	private HotelUserService hotelUserService;
 	
 	@Autowired
+	private RegisterProxy registerProxy;
+	
+	@Autowired
 	private AddressService addressService;
 	
 	@Autowired
@@ -90,36 +94,29 @@ public class RegisterController extends ApplicationController implements Initial
 	
 	@FXML
     private void register(ActionEvent event){
-
-    	if(validate("Email", getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+") &&
-    	   validate("First Name", getFirstName(), "[a-zA-Z]+") &&
-    	   validate("Last Name", getLastName(), "[a-zA-Z]+") && 
-    	   emptyValidation("Password", getPassword().isEmpty()) &&
-    	   emptyValidation("Confirm Password", getConfirmPassword().isEmpty()) &&
-    	   validatePassword(getPassword(), getConfirmPassword())
-    	   ){
     
-			HotelUser hotelUser = new HotelUser();
-			hotelUser.setFirstName(getFirstName());
-			hotelUser.setLastName(getLastName());
-			hotelUser.setEmail(getEmail());
-			hotelUser.setPassword(getPassword());
-			
-			Address address = new Address(getStreet(), getCity(), getState(), getZipcode());
-			addressService.save(address);
-			
-			Payment payment = new Payment();
-			paymentService.save(payment);
-			
-			hotelUser.setAddress(address);
-			hotelUser.setPayment(payment);
-			
-			hotelUserService.save(hotelUser);
-			
-			showAlert(getStringFromResourceBundle("register.successful"));
-			
-			stageManager.switchScene(FxmlView.LOGIN);
-    	}
+		HotelUser hotelUser = new HotelUser();
+		hotelUser.setFirstName(getFirstName());
+		hotelUser.setLastName(getLastName());
+		hotelUser.setEmail(getEmail());
+		hotelUser.setPassword(getPassword());
+		
+		Address address = new Address(getStreet(), getCity(), getState(), getZipcode());
+		addressService.save(address);
+		
+		Payment payment = new Payment();
+		paymentService.save(payment);
+		
+		hotelUser.setAddress(address);
+		hotelUser.setPayment(payment);
+		
+		// Call Register Proxy			
+		registerProxy.save(hotelUser);
+		
+		showAlert(getStringFromResourceBundle("register.successful"));
+		
+		stageManager.switchScene(FxmlView.LOGIN);
+    	
     }
 	
 	
