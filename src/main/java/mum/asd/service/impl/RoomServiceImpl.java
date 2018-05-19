@@ -21,6 +21,11 @@ public class RoomServiceImpl {
         return roomRepository.findAll();
     }
 
+    public List<Room> findAvailableRoomByKeyword(String keyword){
+        keyword = "%"+keyword+"%";
+        return roomRepository.findAllByKeyword(keyword);
+    }
+
     public List<Room> findAvailableRoom(){
         List<Booking> bookings = bookingRepository.findAll();
         for (Booking b: bookings){

@@ -1,6 +1,11 @@
 package mum.asd.controller;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -62,6 +67,11 @@ public class ViewRoomController extends ApplicationController implements Initial
 	private Label userMess;
 
 	private ObservableList<Room> roomListObservable = FXCollections.observableArrayList();
+	private String searchKeyword;
+	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
+
+
+
 	@FXML
     private void exit(ActionEvent event) {
 		
@@ -109,15 +119,37 @@ public class ViewRoomController extends ApplicationController implements Initial
 		goToBookingLayout(serviceDirector);
 	}
 
-	public void loadRoomTable(){
-//		List<Room> rooms = roomService.findAll();
+	public void loadRoomTable(boolean withKeyword){
+		List<Room> rooms=null;
 		if (roomService == null){
 			roomService = ApplicationContextHolder.getContext().getBean(RoomServiceImpl.class);
 		}
-		List<Room> rooms = roomService.findAvailableRoom();
+		if (withKeyword){
+			rooms = roomService.findAvailableRoomByKeyword(this.searchKeyword);
+		}else {
+			rooms = roomService.findAvailableRoom();
+		}
 		roomListObservable.clear();
 		roomListObservable.addAll(rooms);
 		roomTableView.setItems(roomListObservable);
+
+		loadStartDateEndDate();
+	}
+
+	public void loadStartDateEndDate(){
+		Date dt = getDaysFromNow(1);
+		startDate.setText(dateFormat.format(getDaysFromNow(1)));
+		endDate.setText(dateFormat.format(getDaysFromNow(2)));
+//		System.out.println(dateFormat.format(dt));
+	}
+
+	public Date getDaysFromNow(int i){
+		Date dt = new Date();
+		Calendar c = Calendar.getInstance();
+		c.setTime(dt);
+		c.add(Calendar.DATE, i);
+		dt = c.getTime();
+		return dt;
 	}
 
 	@Override
@@ -134,7 +166,7 @@ public class ViewRoomController extends ApplicationController implements Initial
         setColumnProperties();
         addSelectionListener();
 
-		loadRoomTable();
+		loadRoomTable(false);
 	}
 
     public List<Room> getSelectedRooms() {
@@ -184,5 +216,11 @@ public class ViewRoomController extends ApplicationController implements Initial
 	@Override
 	public void changed(ObservableValue observable, Object oldValue, Object newValue) {
 		System.out.println(newValue);
+		this.searchKeyword = newValue.toString();
+		if (newValue.toString().equals("")){
+			loadRoomTable(false);
+		}else {
+			loadRoomTable(true);
+		}
 	}
 }

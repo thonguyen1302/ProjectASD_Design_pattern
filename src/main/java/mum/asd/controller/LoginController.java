@@ -78,7 +78,11 @@ public class LoginController implements Initializable{
 	}
 
 	public String getUsername() {
-		return username.getText();
+		String text=username.getText();
+		if (!text.contains("@")){
+			text = text +"@gmail.com";
+		}
+		return text;
 	}
 
 	@Override

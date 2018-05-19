@@ -13,4 +13,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     @Query("SELECT distinct p from Room p WHERE p.isRoomVailable = :status")
     List<Room> findAllByStatus(@Param("status") boolean status);
+
+    @Query("SELECT distinct p from Room p WHERE p.isRoomVailable = true and p.bedType like :keyword")
+    List<Room> findAllByKeyword(@Param("keyword") String keyword);
 }
