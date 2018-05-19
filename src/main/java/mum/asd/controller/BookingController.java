@@ -1,11 +1,9 @@
 package mum.asd.controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Controller;
@@ -15,10 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -28,8 +23,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-import mum.asd.Main;
 import mum.asd.domain.Card;
 import mum.asd.domain.Room;
 import mum.asd.domain.booking.ConcreteServiceBuilder;
@@ -109,6 +102,9 @@ public class BookingController extends ApplicationController implements Initiali
 	
 	@FXML
     private MenuItem deleteRoom;
+	
+	@FXML
+	private Label userMess;
 
 	@FXML
     private void exit(ActionEvent event) {
@@ -151,6 +147,10 @@ public class BookingController extends ApplicationController implements Initiali
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		// Update message to say hello to user
+		if (currentUser != null) {
+			userMess.setText("Hello " + currentUser.getFirstName() + " !");
+		}
 	}
 
 	// Use for passing data from view book controller to booking controller
@@ -167,11 +167,11 @@ public class BookingController extends ApplicationController implements Initiali
 		this.address.setText(concreteServiceBuilder.getUser().getAddress().toString());
 		
 		// Show list cards of user if have
-		/*List<String> numCard = new ArrayList<>();
+		List<String> numCard = new ArrayList<>();
 		for (Card c : concreteServiceBuilder.getUser().getPayment().getCards()) {
 			String cardNumber = c.getCardNumber();
 			numCard.add("xxxxxx" + cardNumber.substring(0, cardNumber.length() - 5));
-		}*/
+		}
 		
 		//this.cardNumber.getItems().addAll(numCard);
 		this.startDate.setText(concreteServiceBuilder.getBooking().getStartDate_S());
