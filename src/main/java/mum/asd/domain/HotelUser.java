@@ -14,7 +14,6 @@ public class HotelUser {
     private String lastName;
     private String phone;
     private String password;
-    private String confirmPassword;
 //    private long address_id;
     @Enumerated
     private Gender gender;
@@ -71,14 +70,6 @@ public class HotelUser {
         this.password = password;
     }
     
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
     public Gender getGender() {
         return gender;
     }

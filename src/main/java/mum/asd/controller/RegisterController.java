@@ -77,8 +77,7 @@ public class RegisterController extends ApplicationController implements Initial
 	@Autowired
 	private HotelUserService hotelUserService;
 	
-	@Autowired
-	private RegisterProxy registerProxy;
+	private RegisterProxy registerProxy = new RegisterProxy();
 	
 	@Autowired
 	private AddressService addressService;
@@ -102,21 +101,11 @@ public class RegisterController extends ApplicationController implements Initial
 		hotelUser.setPassword(getPassword());
 		
 		Address address = new Address(getStreet(), getCity(), getState(), getZipcode());
-		addressService.save(address);
-		
-		Payment payment = new Payment();
-		paymentService.save(payment);
-		
 		hotelUser.setAddress(address);
-		hotelUser.setPayment(payment);
 		
 		// Call Register Proxy			
 		registerProxy.save(hotelUser);
 		
-		showAlert(getStringFromResourceBundle("register.successful"));
-		
-		stageManager.switchScene(FxmlView.LOGIN);
-    	
     }
 	
 	
