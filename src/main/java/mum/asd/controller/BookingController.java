@@ -130,16 +130,6 @@ public class BookingController extends ApplicationController implements Initiali
 	}
 	
 	@FXML
-    private void logout(ActionEvent event) {
-		
-	}
-	
-	@FXML
-    private void deleteRoom(ActionEvent event) {
-		
-	}
-	
-	@FXML
     private void addNewCard(ActionEvent event) {
 		gotoAddCardLayout(this.serviceDirector);
 	}
