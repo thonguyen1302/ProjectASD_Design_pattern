@@ -89,7 +89,7 @@ public class LoginController implements Initializable{
 		sampleDataService.generateSampleData();
 	}
 
-	@Scheduled(cron="0/2 * * * * *")
+//	@Scheduled(cron="0/2 * * * * *")
 	public void printHello(){
 		System.out.println("Hello World");
 	}

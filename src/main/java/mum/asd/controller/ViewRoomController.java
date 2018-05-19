@@ -10,6 +10,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mum.asd.domain.*;
+import mum.asd.service.ApplicationContextHolder;
+import mum.asd.service.PaymentService;
 import mum.asd.service.impl.RoomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -106,6 +108,9 @@ public class ViewRoomController extends ApplicationController implements Initial
 
 	public void loadRoomTable(){
 //		List<Room> rooms = roomService.findAll();
+		if (roomService == null){
+			roomService = ApplicationContextHolder.getContext().getBean(RoomServiceImpl.class);
+		}
 		List<Room> rooms = roomService.findAvailableRoom();
 		roomListObservable.clear();
 		roomListObservable.addAll(rooms);
