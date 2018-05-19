@@ -173,7 +173,7 @@ public class BookingController extends ApplicationController implements Initiali
 			numCard.add("xxxxxx" + cardNumber.substring(0, cardNumber.length() - 5));
 		}
 		
-		//this.cardNumber.getItems().addAll(numCard);
+		this.cardNumber.getItems().addAll(numCard);
 		this.startDate.setText(concreteServiceBuilder.getBooking().getStartDate_S());
 		this.endDate.setText(concreteServiceBuilder.getBooking().getEndDate_S());
 		
