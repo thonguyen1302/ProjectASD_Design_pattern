@@ -67,6 +67,11 @@ public class LoginController implements Initializable{
     	}
     }
 	
+	@FXML
+    private void btnRegister(ActionEvent event) throws IOException{
+		stageManager.switchScene(FxmlView.REGISTER);
+    }
+	
 	public String getPassword() {
 		return password.getText();
 	}

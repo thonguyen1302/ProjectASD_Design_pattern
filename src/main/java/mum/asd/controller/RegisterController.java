@@ -109,6 +109,12 @@ public class RegisterController extends ApplicationController implements Initial
     }
 	
 	
+	@FXML
+    private void login(ActionEvent event){
+		stageManager.switchScene(FxmlView.LOGIN);
+	}
+	
+	
 	public String getEmail() {
 		return email.getText();
 	}
