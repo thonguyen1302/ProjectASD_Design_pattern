@@ -6,6 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import mum.asd.service.ApplicationContextHolder;
+import mum.asd.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +38,9 @@ public class ApplicationController {
 	
 	
 	public void showUserInfo() {
+		if (stageManager == null){
+			stageManager = ApplicationContextHolder.getContext().getBean(StageManager.class);
+		}
 		stageManager.switchScene(FxmlView.USERINFO);
 	}
 
@@ -45,6 +50,9 @@ public class ApplicationController {
 	 * Tan Tho Nguyen
 	 */
     public void logout() {
+		if (stageManager == null){
+			stageManager = ApplicationContextHolder.getContext().getBean(StageManager.class);
+		}
     	stageManager.switchScene(FxmlView.LOGIN);
 	}
 	
