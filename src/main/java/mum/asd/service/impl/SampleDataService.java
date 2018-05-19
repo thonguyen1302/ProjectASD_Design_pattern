@@ -2,10 +2,12 @@ package mum.asd.service.impl;
 
 import mum.asd.domain.*;
 import mum.asd.repository.*;
+import org.omg.PortableInterceptor.HOLDING;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class SampleDataService {
@@ -38,41 +40,122 @@ public class SampleDataService {
 
     public void generateSampleData(){
         addSampleAddress();
-        addSamplePromotion();
         addSampleBooking();
+        addSampleUser();
+        addSampleCard();
+        addSamplePayment();
+        addSamplePromotion();
+        addSampleReceipt();
         addSampleRoom();
     }
 
-    public void addSampleUser(){
+    public void addPaymentToHotelUser(){
+        List<HotelUser> hotelUsers = hotelUserRepository.findAll();
+        List<Payment> payments = paymentRepository.findAll();
+        for (int i = 0; i<hotelUsers.size();i++){
+            HotelUser hotelUser = hotelUsers.get(i);
+            hotelUser.setPayment(payments.get(i));
+            hotelUserRepository.save(hotelUser);
+        }
+    }
 
+    public void addAddressToHotelUser(){
+        List<Address> addresses = addressRepository.findAll();
+        List<HotelUser> hotelUsers = hotelUserRepository.findAll();
+        int n = addresses.size()>hotelUsers.size()?hotelUsers.size():addresses.size();
+
+        for (int i = 0; i<n;i++){
+            HotelUser temp = hotelUsers.get(i);
+            temp.setAddress(addresses.get(i));
+            hotelUserRepository.save(temp);
+        }
+    }
+
+
+    public void addSampleReceipt(){
+        if (receiptRepository.findAll().size()==0){
+            addReceipt(1111,1112,600);
+            addReceipt(2111,2112,650);
+            addReceipt(3111,3112,800);
+        }
+    }
+
+    public void addReceipt(int bookingNumber, int receiptNumber, float total){
+        Receipt receipt = new Receipt();
+        receipt.setBookingNumber(bookingNumber);
+        receipt.setReceiptNumber(receiptNumber);
+        receipt.setTotal(total);
+    }
+
+    public void addSamplePayment(){
+        if (paymentRepository.findAll().size()==0){
+            addPayment(500,"Credit");
+            addPayment(750,"Credit");
+            addPayment(1000,"Debit");
+            addPayment(1500,"Debit");
+        }
+    }
+
+    public void addPayment(float amount, String type){
+        Payment payment = new Payment();
+        payment.setAmount(amount);
+        payment.setType(type);
+        paymentRepository.save(payment);
+    }
+
+    public void addSampleCard(){
+        if (cardRepository.findAll().size()==0){
+            addCard("900876574434", new Date(),"Nguyen Van Anh", "832","07-2020" );
+            addCard("900876574435", new Date(),"Nguyen Tuan Dung", "116","05-2020" );
+            addCard("900876574436", new Date(),"Nguyen Jone", "332","07-2021" );
+            addCard("900876574437", new Date(),"Tran Tien", "567","12-2020" );
+        }
+    }
+
+    public void addCard(String cardNumber, Date expiredDate, String holderName, String pinNumber, String expiredDateString){
+        Card card = new Card();
+        card.setCardNumber(cardNumber);
+        card.setExpiredDate(expiredDate);
+        card.setHoldername(holderName);
+        card.setPinNumber(pinNumber);
+        card.setExpiredDateS(expiredDateString);
+    }
+
+    public void addSampleUser(){
+        if (hotelUserRepository.findAll().size()==0){
+            addUser("639890776576","sang@gmail.com","Sang","Tran",Gender.Male,"123","90087654563",UserType.Admin);
+            addUser("63989077653","tho@gmail.com","Tho","Nguyen",Gender.Male,"123","90087654444",UserType.Admin);
+            addUser("639890776236","vy@gmail.com","Vy","Nguyen",Gender.Female,"123","90087654223",UserType.Admin);
+            addUser("639222276236","user@gmail.com","Jone","Doe",Gender.Male,"123","90011114223",UserType.Customer);
+            addAddressToHotelUser();
+            addPaymentToHotelUser();
+        }
     }
 
     public void addUser(String credit, String email, String firstName, String lastName, Gender gender, String password, String phone, UserType userType){
         HotelUser hotelUser = new HotelUser();
-        hotelUser.setEmail("sang@acb.com");
-        hotelUser.setPassword("123");
-        hotelUser.setFirstName("Sang");
-        hotelUser.setLastName("Tran");
-        hotelUser.setPhone("99903813");
-        hotelUser.setGender(Gender.Male);
-        hotelUser.setUserType(UserType.Admin);
+        hotelUser.setEmail(email);
+        hotelUser.setPassword(password);
+        hotelUser.setFirstName(firstName);
+        hotelUser.setLastName(lastName);
+        hotelUser.setPhone(phone);
+        hotelUser.setGender(gender);
+        hotelUser.setUserType(userType);
+        hotelUserRepository.save(hotelUser);
     }
 
-    public void addPayment(){
-
-    }
 
     public void addSampleRoom(){
         if (roomRepository.findAll().size() == 0){
-            addRoom(101,"Grand", 7.6f, 300, 2, 2, true);
-            addRoom(102,"GrandQueen", 7f, 350, 2, 2, true);
-            addRoom(103,"GrandWest", 7.1f, 310, 2, 2, true);
-            addRoom(201,"GrandBeach", 7.2f, 320, 2, 2, true);
-            addRoom(202,"GrandHill", 7.3f, 280, 2, 2, true);
+            addRoom(101,"Grand", 7.6f, 300, 2, 2, true,RoomType.Deluxe);
+            addRoom(102,"GrandQueen", 7f, 350, 2, 2, true,RoomType.Standard);
+            addRoom(103,"GrandWest", 7.1f, 310, 2, 2, true,RoomType.Suite);
+            addRoom(201,"GrandBeach", 7.2f, 320, 2, 2, true,RoomType.Deluxe);
+            addRoom(202,"GrandHill", 7.3f, 280, 2, 2, true,RoomType.Suite);
         }
     }
 
-    public void addRoom(int roomNumber, String bedType, float tax, int price, int numChildren, int numAdult, boolean isVailable){
+    public void addRoom(int roomNumber, String bedType, float tax, int price, int numChildren, int numAdult, boolean isVailable,RoomType roomType){
         Room room = new Room();
         room.setTax(tax);
         room.setPrice(price);
@@ -80,6 +163,7 @@ public class SampleDataService {
         room.setNumberAdult(numAdult);
         room.setBedType(bedType);
         room.setRoomVailable(isVailable);
+        room.setRoomType(roomType);
         roomRepository.save(room);
     }
 
@@ -134,6 +218,18 @@ public class SampleDataService {
             address.setCity("Fairfield");
             address.setState("IOWA");
             address.setStreet("1302 S Main Street");
+            address.setZipcode("52556");
+            addressRepository.save(address);
+             address = new Address();
+            address.setCity("Fairfield");
+            address.setState("IOWA");
+            address.setStreet("5th Bủlington");
+            address.setZipcode("52556");
+            addressRepository.save(address);
+             address = new Address();
+            address.setCity("Fairfield");
+            address.setState("IOWA");
+            address.setStreet("12th Jeferson");
             address.setZipcode("52556");
             addressRepository.save(address);
         }
