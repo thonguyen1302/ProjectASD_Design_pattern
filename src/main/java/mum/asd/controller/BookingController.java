@@ -131,6 +131,9 @@ public class BookingController extends ApplicationController implements Initiali
     private void pay(ActionEvent event) {
 		if (this.cardNumber.getValue() != null) {
 			this.serviceDirector.getServiceBuilder().saveBooking();
+			showAlert(ResourceBundle.getBundle("Bundle").getString("booking.complete"), 
+					AlertType.INFORMATION);
+			goToViewRoomLayout();
 		} else {
 			showAlert(ResourceBundle.getBundle("Bundle").getString("booking.warning"), 
 							AlertType.WARNING);
