@@ -22,6 +22,8 @@ import mum.asd.domain.HotelUser;
 import mum.asd.domain.Payment;
 import mum.asd.domain.User;
 import mum.asd.domain.proxy.RegisterProxy;
+import mum.asd.domain.stategy.CustomerStategy;
+import mum.asd.domain.stategy.UserType;
 import mum.asd.service.AddressService;
 import mum.asd.service.HotelUserService;
 import mum.asd.service.PaymentService;
@@ -102,6 +104,12 @@ public class RegisterController extends ApplicationController implements Initial
 		
 		Address address = new Address(getStreet(), getCity(), getState(), getZipcode());
 		hotelUser.setAddress(address);
+		
+		// Set user type - Stategy
+		UserType userType = new UserType();
+		userType.setStategy(new CustomerStategy());
+		hotelUser = userType.createUser(hotelUser);
+		
 		
 		// Call Register Proxy			
 		registerProxy.save(hotelUser);

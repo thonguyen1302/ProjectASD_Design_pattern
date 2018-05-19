@@ -37,8 +37,6 @@ public class RegisterProxy extends ApplicationController  {
     	   validate("First Name", entity.getFirstName(), "[a-zA-Z]+") &&
     	   validate("Last Name", entity.getLastName(), "[a-zA-Z]+") && 
     	   emptyValidation("Password", entity.getPassword().isEmpty())
-//    	   emptyValidation("Confirm Password", entity.getConfirmPassword().isEmpty()) &&
-//    	   validatePassword(entity.getPassword(), entity.getConfirmPassword())
     	   ){ 
 			
 			addressService = ApplicationContextHolder.getContext().getBean(AddressService.class);
