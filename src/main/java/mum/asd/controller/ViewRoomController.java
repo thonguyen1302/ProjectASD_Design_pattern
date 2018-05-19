@@ -174,7 +174,8 @@ public class ViewRoomController extends ApplicationController implements Initial
 	}
 
 	public void loadRoomTable(){
-		List<Room> rooms = roomService.findAll();
+//		List<Room> rooms = roomService.findAll();
+		List<Room> rooms = roomService.findAvailableRoom();
 		roomListObservable.clear();
 		roomListObservable.addAll(rooms);
 		roomTableView.setItems(roomListObservable);

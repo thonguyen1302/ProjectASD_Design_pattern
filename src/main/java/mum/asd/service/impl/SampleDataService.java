@@ -43,10 +43,10 @@ public class SampleDataService {
     public void generateSampleData(){
         addSampleAddress();
         addSampleBooking();
-        addSampleUser();
-        addSampleCard();
         addSamplePayment();
+        addSampleCard();
         addSamplePromotion();
+        addSampleUser();
         addSampleReceipt();
         addSampleRoom();
         addAddressToHotelUser();
@@ -105,10 +105,10 @@ public class SampleDataService {
     }
 
     public void addPayment(float amount, String type){
-        Payment payment = new Payment();
-        payment.setAmount(amount);
-        payment.setType(type);
-        paymentRepository.save(payment);
+        Payment payment1 = new Payment();
+        payment1.setAmount(amount);
+        payment1.setType(type);
+        paymentRepository.save(payment1);
     }
 
     public void addSampleCard(){
@@ -170,13 +170,24 @@ public class SampleDataService {
             addRoom(101,"Grand", 7.6f, 300, 2, 2, true,RoomType.Deluxe);
             addRoom(102,"GrandQueen", 7f, 350, 2, 2, true,RoomType.Standard);
             addRoom(103,"GrandWest", 7.1f, 310, 2, 2, true,RoomType.Suite);
-            addRoom(201,"GrandBeach", 7.2f, 320, 2, 2, true,RoomType.Deluxe);
-            addRoom(202,"GrandHill", 7.3f, 280, 2, 2, true,RoomType.Suite);
+            addRoom(104,"GrandBeach", 7.2f, 320, 2, 2, true,RoomType.Deluxe);
+            addRoom(105,"GrandHill", 7.3f, 280, 2, 2, true,RoomType.Suite);
+            addRoom(201,"Grand", 7.6f, 300, 2, 2, true,RoomType.Deluxe);
+            addRoom(202,"GrandQueen", 7f, 350, 2, 2, true,RoomType.Standard);
+            addRoom(203,"GrandWest", 7.1f, 310, 2, 2, true,RoomType.Suite);
+            addRoom(204,"GrandBeach", 7.2f, 320, 2, 2, true,RoomType.Deluxe);
+            addRoom(205,"GrandHill", 7.3f, 280, 2, 2, true,RoomType.Suite);
+            addRoom(301,"Grand", 7.6f, 300, 2, 2, true,RoomType.Deluxe);
+            addRoom(302,"GrandQueen", 7f, 350, 2, 2, true,RoomType.Standard);
+            addRoom(303,"GrandWest", 7.1f, 310, 2, 2, true,RoomType.Suite);
+            addRoom(304,"GrandBeach", 7.2f, 320, 2, 2, true,RoomType.Deluxe);
+            addRoom(305,"GrandHill", 7.3f, 280, 2, 2, true,RoomType.Suite);
         }
     }
 
     public void addRoom(int roomNumber, String bedType, float tax, int price, int numChildren, int numAdult, boolean isVailable,RoomType roomType){
         Room room = new Room();
+        room.setRoomNumber(roomNumber);
         room.setTax(tax);
         room.setPrice(price);
         room.setNumberChildren(numChildren);

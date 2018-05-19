@@ -2,6 +2,7 @@ package mum.asd.domain;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.IndexColumn;
 import org.springframework.boot.autoconfigure.data.ldap.LdapDataAutoConfiguration;
 
 import java.time.LocalDate;
@@ -21,7 +22,8 @@ public class Booking {
     private Date startDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
+    @IndexColumn(name="id")
     private List<Room> rooms = new ArrayList<Room>();
     private Boolean checkInStatus;
     private Boolean checkOutStatus;
