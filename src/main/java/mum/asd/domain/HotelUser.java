@@ -25,7 +25,8 @@ public class HotelUser {
     private String credit;
     @OneToOne(fetch = FetchType.EAGER)
     private Payment payment;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
+    @IndexColumn(name="id")
     private List<Booking> bookingList = new ArrayList<>();
     @Enumerated
     private UserType userType;

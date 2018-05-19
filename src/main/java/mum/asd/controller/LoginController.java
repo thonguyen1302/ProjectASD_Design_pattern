@@ -8,6 +8,7 @@ import mum.asd.service.impl.AddressServiceImpl;
 import mum.asd.service.impl.SampleDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
 import mum.asd.config.StageManager;
@@ -86,6 +87,11 @@ public class LoginController implements Initializable{
 	}
 	public void sampleMethod(){
 		sampleDataService.generateSampleData();
+	}
+
+	@Scheduled(cron="0/2 * * * * *")
+	public void printHello(){
+		System.out.println("Hello World");
 	}
 
 }
