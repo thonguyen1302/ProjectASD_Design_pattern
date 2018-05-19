@@ -47,6 +47,7 @@ public class SampleDataService {
         addSamplePromotion();
         addSampleReceipt();
         addSampleRoom();
+        addCardToPayment();
     }
 
     public void addPaymentToHotelUser(){
@@ -119,7 +120,21 @@ public class SampleDataService {
         card.setHoldername(holderName);
         card.setPinNumber(pinNumber);
         card.setExpiredDateS(expiredDateString);
+        cardRepository.save(card);
     }
+
+    public void addCardToPayment(){
+        List<Payment> payments = paymentRepository.findAll();
+        if (payments.get(0).getCards().size()==0){
+            List<Card> cards = cardRepository.findAll();
+            for (int i = 0; i<payments.size(); i++){
+                Payment payment = payments.get(i);
+                payment.getCards().add(cards.get(i));
+                paymentRepository.save(payment);
+            }
+        }
+    }
+
 
     public void addSampleUser(){
         if (hotelUserRepository.findAll().size()==0){
