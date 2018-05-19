@@ -22,8 +22,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mum.asd.domain.Address;
 import mum.asd.domain.Booking;
+import mum.asd.domain.Card;
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.Room;
+import mum.asd.domain.userprofiletemplate.UserProfile;
+import mum.asd.domain.userprofiletemplate.ViewUserInformation;
 import mum.asd.service.HotelUserService;
 import mum.asd.service.impl.BookingServiceImpl;
 import mum.asd.service.impl.RoomServiceImpl;
@@ -68,18 +71,19 @@ public class UserInfoController extends ApplicationController implements Initial
 	
 	@FXML
 	public TableColumn<Booking, String> col_end_date_s;
+
+	
+	@FXML
+	public TableView<Card> cardTableView;
+	
+	@FXML
+	public TableColumn<Card, String> col_card_number;
+	
+	@FXML
+	public TableColumn<Card, String> col_holdername;
 	
 	@Autowired
 	BookingServiceImpl bookingService;
-	
-	private ObservableList<Booking> bookingListObservable = FXCollections.observableArrayList();
-	
-	public void loadBookingTable(){
-		bookingListObservable.clear();
-		
-		bookingListObservable.addAll(currentUser.getBookingList());
-		bookingTableView.setItems(bookingListObservable);
-	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -97,10 +101,19 @@ public class UserInfoController extends ApplicationController implements Initial
 		this.confirmPassword.setText(currentUser.getPassword());
 		
 		bookingTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		cardTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		setBookingColumnProperties();
+		setCardColumnProperties();
 		
-		loadBookingTable();
+		/*
+		 * Template Method Design Pattern
+		 * Tan Tho Nguyen
+		 * Client
+		 */
+		UserProfile userProfile = new ViewUserInformation();
+		userProfile.showProfileUser(currentUser, bookingTableView, cardTableView);
+		
 	}
 	
 	@FXML
@@ -139,6 +152,11 @@ public class UserInfoController extends ApplicationController implements Initial
 		col_booking_number.setCellValueFactory(new PropertyValueFactory<>("bookingNumber"));
 		col_start_date_s.setCellValueFactory(new PropertyValueFactory<>("startDate_S"));
 		col_end_date_s.setCellValueFactory(new PropertyValueFactory<>("endDate_S"));
+	}
+	
+	private void setCardColumnProperties() {
+		col_card_number.setCellValueFactory(new PropertyValueFactory<>("cardNumber"));
+		col_holdername.setCellValueFactory(new PropertyValueFactory<>("holdername"));
 	}
 	
 
