@@ -28,7 +28,7 @@ import mum.asd.domain.booking.ServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
 
 @Controller
-public class ViewRoomController extends ApplicationController implements Initializable {
+public class ViewRoomController extends ApplicationController implements Initializable, ChangeListener {
 
 	public TableColumn<Room, String> colAdults;
 	public TableColumn<Room, String> colChildren;
@@ -151,12 +151,7 @@ public class ViewRoomController extends ApplicationController implements Initial
 //            System.out.println();
 			this.totalRoomsSelected.setText(selectedRooms.size()+"");
                 });
-        searchBox.textProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
-				System.out.println(newValue);
-			}
-		});
+        searchBox.textProperty().addListener(this);
 
 	}
 
@@ -186,4 +181,8 @@ public class ViewRoomController extends ApplicationController implements Initial
 
 	}
 
+	@Override
+	public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+		System.out.println(newValue);
+	}
 }
