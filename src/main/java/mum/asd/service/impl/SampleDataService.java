@@ -6,10 +6,12 @@ import org.omg.PortableInterceptor.HOLDING;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class SampleDataService {
     @Autowired
     AddressRepository addressRepository;
@@ -47,7 +49,11 @@ public class SampleDataService {
         addSamplePromotion();
         addSampleReceipt();
         addSampleRoom();
+        addAddressToHotelUser();
+        addPaymentToHotelUser();
         addCardToPayment();
+
+
     }
 
     public void addPaymentToHotelUser(){
@@ -95,6 +101,7 @@ public class SampleDataService {
             addPayment(1000,"Debit");
             addPayment(1500,"Debit");
         }
+
     }
 
     public void addPayment(float amount, String type){
@@ -142,8 +149,6 @@ public class SampleDataService {
             addUser("63989077653","tho@gmail.com","Tho","Nguyen",Gender.Male,"123","90087654444",UserType.Admin);
             addUser("639890776236","vy@gmail.com","Vy","Nguyen",Gender.Female,"123","90087654223",UserType.Admin);
             addUser("639222276236","user@gmail.com","Jone","Doe",Gender.Male,"123","90011114223",UserType.Customer);
-            addAddressToHotelUser();
-            addPaymentToHotelUser();
         }
     }
 
