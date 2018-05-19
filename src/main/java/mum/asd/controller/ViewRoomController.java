@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -149,7 +151,14 @@ public class ViewRoomController extends ApplicationController implements Initial
 //            System.out.println();
 			this.totalRoomsSelected.setText(selectedRooms.size()+"");
                 });
-    }
+        searchBox.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+				System.out.println(newValue);
+			}
+		});
+
+	}
 
 
     private void setColumnProperties() {
