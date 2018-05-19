@@ -38,6 +38,7 @@ public class ViewRoomController extends ApplicationController implements Initial
 	public TextField totalRoomsSelected;
 	public TextField discount;
 	public Button pay;
+	public TextField searchBox;
 	@Autowired
 	RoomServiceImpl roomService;
 
