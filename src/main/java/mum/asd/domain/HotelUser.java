@@ -77,7 +77,7 @@ public class HotelUser {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
     public Gender getGender() {
         return gender;
     }
