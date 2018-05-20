@@ -1,9 +1,9 @@
-package mum.asd.domain.stategy;
+package mum.asd.domain.strategy;
 
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.UserType;
 
-public class CustomerStategy implements UserStategy {
+public class CustomerStrategy implements UserStrategy {
 
 	@Override
 	public HotelUser setUserType(HotelUser user) {

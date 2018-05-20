@@ -1,7 +1,7 @@
-package mum.asd.domain.stategy;
+package mum.asd.domain.strategy;
 
 import mum.asd.domain.HotelUser;
 
-public interface UserStategy {
+public interface UserStrategy {
 	public HotelUser setUserType(HotelUser user);
 }
