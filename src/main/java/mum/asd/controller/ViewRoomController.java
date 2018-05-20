@@ -17,6 +17,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mum.asd.domain.*;
+import mum.asd.patterns.FactoryMethod.ConcretePromotionFactory;
+import mum.asd.patterns.FactoryMethod.HolidayPromotion;
+import mum.asd.patterns.FactoryMethod.PromotionFactory;
+import mum.asd.repository.HotelUserRepository;
+import mum.asd.repository.UserRepository;
 import mum.asd.service.ApplicationContextHolder;
 import mum.asd.service.PaymentService;
 import mum.asd.service.impl.RoomServiceImpl;
@@ -134,6 +139,21 @@ public class ViewRoomController extends ApplicationController implements Initial
 		roomTableView.setItems(roomListObservable);
 
 		loadStartDateEndDate();
+		loadPromotion();
+	}
+
+	public void loadPromotion(){
+		HotelUserRepository userRepository = ApplicationContextHolder.getContext().getBean(HotelUserRepository.class);
+
+		HotelUser hotelUser = userRepository.findOne(currentUser.getId());
+		List<Promotion> promotions = hotelUser.getPromotions();
+		int discountTotal = 0;
+		for (Promotion promotion: promotions){
+			PromotionFactory promotionFactory = new ConcretePromotionFactory();
+
+			discountTotal += promotionFactory.createPromotion(promotion.getName()).executeGetDiscout();
+		}
+		discount.setText(discountTotal+"");
 	}
 
 	public void loadStartDateEndDate(){
