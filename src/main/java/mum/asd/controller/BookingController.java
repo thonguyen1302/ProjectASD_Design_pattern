@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import mum.asd.domain.HotelUser;
+import mum.asd.domain.Promotion;
+import mum.asd.repository.HotelUserRepository;
+import mum.asd.service.ApplicationContextHolder;
 import org.springframework.stereotype.Controller;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -128,6 +132,18 @@ public class BookingController extends ApplicationController implements Initiali
 							AlertType.WARNING);
 		}
 	}
+	public int loadPromotion(){
+		HotelUserRepository userRepository = ApplicationContextHolder.getContext().getBean(HotelUserRepository.class);
+
+		HotelUser hotelUser = userRepository.findOne(currentUser.getId());
+		List<Promotion> promotions = hotelUser.getPromotions();
+		int discountTotal = 0;
+		for (Promotion promotion: promotions){
+			discountTotal += promotion.getDiscount();
+		}
+		discount.setText(discountTotal+"");
+		return discountTotal;
+	}
 	
 	@FXML
     private void addNewCard(ActionEvent event) {
@@ -168,6 +184,7 @@ public class BookingController extends ApplicationController implements Initiali
 		this.endDate.setText(concreteServiceBuilder.getBooking().getEndDate_S());
 		
 		List<Room> lstRoom = concreteServiceBuilder.getBooking().getRooms();
+//		concreteServiceBuilder.getBooking().
 		Double discountPercent = 0.0;
 		// Verify discount
 		if (lstRoom.size() > 2 && lstRoom.size() < 5) {
@@ -186,7 +203,8 @@ public class BookingController extends ApplicationController implements Initiali
 		if (discountPercent > 0) {
 			finalPrice = finalPrice - (finalPrice * discountPercent);
 		}
-		
+		finalPrice = finalPrice - (finalPrice * (float)loadPromotion()/100);
+
 		this.totalPrice.setText(String.valueOf(finalPrice));
 		
 		
