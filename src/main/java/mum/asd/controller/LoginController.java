@@ -127,7 +127,7 @@ public class LoginController implements Initializable{
 		System.out.println("Hello World");
 	}
 
-	@Scheduled(cron="0/3 * * * * *")
+	@Scheduled(cron="0/45 * * * * *")
 	public void broadCastPromotionToHoterlUser() {
 		if(currentUser!=null){
 			if (didSetUpMediator == false){
@@ -137,7 +137,7 @@ public class LoginController implements Initializable{
 			}
 			currentHotelCustomer.sendPromotion(PromotionName.SpringHoliday.toString());
 //			promotionMediator.broadCastPromotion(PromotionName.SpringHoliday.toString(),currentHotelCustomer);
-			System.out.println("BroadCast holidate promotion");
+			System.out.println("BroadCast holiday promotion");
 		}
 	}
 }
