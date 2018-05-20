@@ -1,9 +1,11 @@
 package mum.asd.domain;
 
+import mum.asd.patterns.prototype.PromotionPrototype;
+
 import javax.persistence.*;
 
 @Entity
-public class Promotion {
+public class Promotion implements PromotionPrototype {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
@@ -11,6 +13,15 @@ public class Promotion {
     private String name;
     private int discount;
     private float percent;
+
+    public Promotion() {
+    }
+
+    public Promotion(String name, int discount, float percent) {
+        this.name = name;
+        this.discount = discount;
+        this.percent = percent;
+    }
 
     public long getId() {
         return id;
@@ -42,5 +53,10 @@ public class Promotion {
 
     public void setPercent(float percent) {
         this.percent = percent;
+    }
+
+    @Override
+    public PromotionPrototype doClone() {
+        return null;
     }
 }
