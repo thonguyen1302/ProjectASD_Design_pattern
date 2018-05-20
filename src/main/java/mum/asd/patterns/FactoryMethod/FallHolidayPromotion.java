@@ -1,6 +1,7 @@
 package mum.asd.patterns.FactoryMethod;
 
 import mum.asd.domain.Promotion;
+import mum.asd.patterns.Command.PromotionCommandInterface;
 
 public class FallHolidayPromotion extends HolidayPromotion {
     public FallHolidayPromotion(){
@@ -9,4 +10,5 @@ public class FallHolidayPromotion extends HolidayPromotion {
         this.setPercent(25);
         this.setName("FallHoliday");
     }
+
 }

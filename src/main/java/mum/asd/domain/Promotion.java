@@ -56,7 +56,7 @@ public class Promotion implements PromotionPrototype {
     }
 
     @Override
-    public PromotionPrototype doClone() {
+    public Promotion doClone() {
         return null;
     }
 }

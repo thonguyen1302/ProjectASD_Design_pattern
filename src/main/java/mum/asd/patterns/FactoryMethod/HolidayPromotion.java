@@ -1,9 +1,13 @@
 package mum.asd.patterns.FactoryMethod;
 
 import mum.asd.domain.Promotion;
+import mum.asd.patterns.prototype.PromotionPromotionPrototypeImpl;
+import mum.asd.patterns.prototype.PromotionPrototype;
 
-public class HolidayPromotion extends Promotion {
+public abstract class HolidayPromotion extends Promotion {
     public Promotion getPromotion(){
-        return new Promotion(this.getName(),this.getDiscount(),this.getPercent());
+        PromotionPrototype promotionPrototype = new PromotionPromotionPrototypeImpl(this.getName(),this.getDiscount(),this.getPercent());
+        Promotion promotion = promotionPrototype.doClone();
+        return promotion;
     }
 }

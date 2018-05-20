@@ -127,7 +127,7 @@ public class LoginController implements Initializable{
 		System.out.println("Hello World");
 	}
 
-	@Scheduled(cron="0/30 * * * * *")
+	@Scheduled(cron="0/3 * * * * *")
 	public void broadCastPromotionToHoterlUser() {
 		if(currentUser!=null){
 			if (didSetUpMediator == false){
