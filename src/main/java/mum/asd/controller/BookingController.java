@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mum.asd.domain.Card;
 import mum.asd.domain.Room;
+import mum.asd.domain.alert.HotelAlert;
 import mum.asd.domain.booking.ConcreteServiceBuilder;
 import mum.asd.domain.booking.ServiceDirector;
 import mum.asd.domain.bookingprices.ServiceElementDoVisitor;
@@ -120,11 +121,11 @@ public class BookingController extends ApplicationController implements Initiali
     private void pay(ActionEvent event) {
 		if (this.cardNumber.getValue() != null) {
 			this.serviceDirector.getServiceBuilder().saveBooking();
-			showAlert(ResourceBundle.getBundle("Bundle").getString("booking.completed"), 
+			HotelAlert.showAlert(ResourceBundle.getBundle("Bundle").getString("booking.completed"), 
 					AlertType.INFORMATION);
 			goToViewRoomLayout();
 		} else {
-			showAlert(ResourceBundle.getBundle("Bundle").getString("booking.warning"), 
+			HotelAlert.showAlert(ResourceBundle.getBundle("Bundle").getString("booking.warning"), 
 							AlertType.WARNING);
 		}
 	}

@@ -25,8 +25,10 @@ import mum.asd.domain.Booking;
 import mum.asd.domain.Card;
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.Room;
+import mum.asd.domain.alert.HotelAlert;
 import mum.asd.domain.userprofiletemplate.UserProfile;
 import mum.asd.domain.userprofiletemplate.ViewUserInformation;
+import mum.asd.domain.validator.HotelValidator;
 import mum.asd.service.HotelUserService;
 import mum.asd.service.impl.BookingServiceImpl;
 import mum.asd.service.impl.RoomServiceImpl;
@@ -119,12 +121,12 @@ public class UserInfoController extends ApplicationController implements Initial
 	@FXML
     private void btnSave(ActionEvent event){
 
-    	if(validate("Email", getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+") &&
-    	   validate("First Name", getFirstName(), "[a-zA-Z]+") &&
-    	   validate("Last Name", getLastName(), "[a-zA-Z]+") && 
-    	   emptyValidation("Password", getPassword().isEmpty()) &&
-    	   emptyValidation("Confirm Password", getConfirmPassword().isEmpty()) &&
-    	   validatePassword(getPassword(), getConfirmPassword())
+    	if(HotelValidator.validate("Email", getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+") &&
+			HotelValidator.validate("First Name", getFirstName(), "[a-zA-Z]+") &&
+			HotelValidator.validate("Last Name", getLastName(), "[a-zA-Z]+") && 
+			HotelValidator.emptyValidation("Password", getPassword().isEmpty()) &&
+			HotelValidator.emptyValidation("Confirm Password", getConfirmPassword().isEmpty()) &&
+			HotelValidator.validatePassword(getPassword(), getConfirmPassword())
     	   ){
     
 			currentUser.setEmail(getEmail());
@@ -136,7 +138,7 @@ public class UserInfoController extends ApplicationController implements Initial
 			
 			hotelUserService.save(currentUser);
 			
-			showAlert(getStringFromResourceBundle("userinfo.successful"));
+			HotelAlert.showAlert(getStringFromResourceBundle("userinfo.successful"));
 			
 //			stageManager.switchScene(FxmlView.LOGIN);
     	}

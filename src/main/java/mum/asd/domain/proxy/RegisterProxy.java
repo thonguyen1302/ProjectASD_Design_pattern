@@ -1,6 +1,7 @@
 package mum.asd.domain.proxy;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -10,6 +11,8 @@ import mum.asd.controller.ApplicationController;
 import mum.asd.domain.Address;
 import mum.asd.domain.HotelUser;
 import mum.asd.domain.Payment;
+import mum.asd.domain.alert.HotelAlert;
+import mum.asd.domain.validator.HotelValidator;
 import mum.asd.service.AddressService;
 import mum.asd.service.ApplicationContextHolder;
 import mum.asd.service.CardService;
@@ -17,8 +20,9 @@ import mum.asd.service.HotelUserService;
 import mum.asd.view.FxmlView;
 import mum.asd.service.PaymentService;
 
-
-public class RegisterProxy extends ApplicationController  {
+// Proxy Pattern
+// Tan Tho Nguyen
+public class RegisterProxy {
     @Autowired
     public StageManager stageManager;
 
@@ -33,10 +37,10 @@ public class RegisterProxy extends ApplicationController  {
 	
 	public void save(HotelUser entity) {
 		// Proxy - Validate before save - Tan Tho Nguyen
-		if(validate("Email", entity.getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+") &&
-    	   validate("First Name", entity.getFirstName(), "[a-zA-Z]+") &&
-    	   validate("Last Name", entity.getLastName(), "[a-zA-Z]+") && 
-    	   emptyValidation("Password", entity.getPassword().isEmpty())
+		if(HotelValidator.validate("Email", entity.getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+") &&
+			HotelValidator.validate("First Name", entity.getFirstName(), "[a-zA-Z]+") &&
+			HotelValidator.validate("Last Name", entity.getLastName(), "[a-zA-Z]+") && 
+			HotelValidator.emptyValidation("Password", entity.getPassword().isEmpty())
     	   ){ 
 			
 			addressService = ApplicationContextHolder.getContext().getBean(AddressService.class);
@@ -52,7 +56,7 @@ public class RegisterProxy extends ApplicationController  {
 			hotelUserService = ApplicationContextHolder.getContext().getBean(HotelUserService.class);
 			hotelUserService.save(entity); 
 			
-			showAlert(getStringFromResourceBundle("register.successful"));
+			HotelAlert.showAlert(ResourceBundle.getBundle("Bundle").getString("register.successful"));
 			
 			stageManager = ApplicationContextHolder.getContext().getBean(StageManager.class);
 			stageManager.switchScene(FxmlView.LOGIN);

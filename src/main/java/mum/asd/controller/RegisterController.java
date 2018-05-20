@@ -106,12 +106,14 @@ public class RegisterController extends ApplicationController implements Initial
 		hotelUser.setAddress(address);
 		
 		// Set user type - Stategy
+		// Tan Tho Nguyen
 		UserType userType = new UserType();
 		userType.setStategy(new CustomerStategy());
 		hotelUser = userType.createUser(hotelUser);
 		
 		
-		// Call Register Proxy			
+		// Call Register Proxy
+		// Tan Tho Nguyen
 		registerProxy.save(hotelUser);
 		
     }
