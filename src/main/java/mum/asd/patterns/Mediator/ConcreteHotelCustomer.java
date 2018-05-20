@@ -4,6 +4,7 @@ import mum.asd.domain.HotelUser;
 import mum.asd.domain.Promotion;
 import mum.asd.patterns.FactoryMethod.ConcretePromotionFactory;
 import mum.asd.patterns.FactoryMethod.HolidayPromotion;
+import mum.asd.patterns.Singleton.PromotionRepositorySingleton;
 import mum.asd.repository.HotelUserRepository;
 import mum.asd.repository.PromotionRepository;
 import mum.asd.service.ApplicationContextHolder;
@@ -33,7 +34,8 @@ public class ConcreteHotelCustomer extends HotelCustomer {
         HotelUserService hotelUserService = ApplicationContextHolder.getContext().getBean(HotelUserService.class);
         HotelUser hotelUser = hotelUserService.find(this.hotelUser.getId());
         hotelUser.getPromotions().add(promotion);
-        PromotionRepository promotionRepository = ApplicationContextHolder.getContext().getBean(PromotionRepository.class);
+//        PromotionRepository promotionRepository = ApplicationContextHolder.getContext().getBean(PromotionRepository.class);
+        PromotionRepository promotionRepository = PromotionRepositorySingleton.getInstance().getPromotionRepository();
         promotionRepository.save(promotion);
         HotelUserRepository hotelUserRepository = ApplicationContextHolder.getContext().getBean(HotelUserRepository.class);
         hotelUserRepository.save(hotelUser);

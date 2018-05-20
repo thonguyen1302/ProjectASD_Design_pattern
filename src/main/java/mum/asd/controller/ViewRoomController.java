@@ -17,6 +17,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mum.asd.domain.*;
+import mum.asd.patterns.FactoryMethod.ConcretePromotionFactory;
+import mum.asd.patterns.FactoryMethod.HolidayPromotion;
+import mum.asd.patterns.FactoryMethod.PromotionFactory;
 import mum.asd.repository.HotelUserRepository;
 import mum.asd.repository.UserRepository;
 import mum.asd.service.ApplicationContextHolder;
@@ -146,7 +149,9 @@ public class ViewRoomController extends ApplicationController implements Initial
 		List<Promotion> promotions = hotelUser.getPromotions();
 		int discountTotal = 0;
 		for (Promotion promotion: promotions){
-			discountTotal += promotion.getDiscount();
+			PromotionFactory promotionFactory = new ConcretePromotionFactory();
+
+			discountTotal += promotionFactory.createPromotion(promotion.getName()).executeGetDiscout();
 		}
 		discount.setText(discountTotal+"");
 	}
