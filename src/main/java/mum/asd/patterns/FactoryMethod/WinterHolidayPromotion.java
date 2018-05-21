@@ -1,6 +1,5 @@
 package mum.asd.patterns.FactoryMethod;
 
-import mum.asd.domain.Promotion;
 import mum.asd.patterns.Command.PromotionCommandInterface;
 
 public class WinterHolidayPromotion extends HolidayPromotion implements PromotionCommandInterface {
@@ -12,6 +11,6 @@ public class WinterHolidayPromotion extends HolidayPromotion implements Promotio
     }
     @Override
     public int executeGetDiscout() {
-        return Math.abs(this.getDiscount()-(int)this.getPercent());
+        return new ComputeDiscount().getDiscount(this);
     }
 }
